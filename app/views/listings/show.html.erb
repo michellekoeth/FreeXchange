@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Searchid:</b>
+  <%= @listing.searchid %>
+</p>
+
+<p>
+  <b>Freecycgroup:</b>
+  <%= @listing.freecycgroup %>
+</p>
+
+<p>
+  <b>Freecychood:</b>
+  <%= @listing.freecychood %>
+</p>
+
+<p>
+  <b>Freecyclistid:</b>
+  <%= @listing.freecyclistid %>
+</p>
+
+<p>
+  <b>Dateposted:</b>
+  <%= @listing.dateposted %>
+</p>
+
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>

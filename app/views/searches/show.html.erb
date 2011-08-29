@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Userid:</b>
+  <%= @search.userid %>
+</p>
+
+<p>
+  <b>Querystr:</b>
+  <%= @search.querystr %>
+</p>
+
+<p>
+  <b>Datestart:</b>
+  <%= @search.datestart %>
+</p>
+
+<p>
+  <b>Dateend:</b>
+  <%= @search.dateend %>
+</p>
+
+
+<%= link_to 'Edit', edit_search_path(@search) %> |
+<%= link_to 'Back', searches_path %>

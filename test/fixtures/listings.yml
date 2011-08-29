@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  searchid: 1
+  freecycgroup: MyString
+  freecychood: MyString
+  freecyclistid: 1
+  dateposted: MyText
+
+two:
+  searchid: 1
+  freecycgroup: MyString
+  freecychood: MyString
+  freecyclistid: 1
+  dateposted: MyText

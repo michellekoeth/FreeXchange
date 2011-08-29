@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  userid: 1
+  querystr: MyString
+  datestart: MyText
+  dateend: MyText
+
+two:
+  userid: 1
+  querystr: MyString
+  datestart: MyText
+  dateend: MyText
