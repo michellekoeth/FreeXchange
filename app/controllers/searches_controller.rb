@@ -2,12 +2,12 @@ class SearchesController < ApplicationController
   # GET /searches
   # GET /searches.xml
   def index
-    @searches = Search.all
+    #@searches = Search.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @searches }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.xml  { render :xml => @searches }
+    #end
   end
 
   # GET /searches/1

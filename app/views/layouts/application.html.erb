@@ -7,8 +7,14 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <div class="general">
+    <h1 class="logo">Free<span id="income">Xchange</span></h1>
 
-<%= yield %>
+    <%= yield %>
+  </div>
+  <!-- The following content will be displayed to everyone -->
+  <div id="credits">FreeXchange helps you find stuff on Freecycle using just an SMS message.
+  </div>
 <div id="user_nav">
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?

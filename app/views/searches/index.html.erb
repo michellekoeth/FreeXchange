@@ -1,29 +1,19 @@
-<h1>Listing searches</h1>
+<h2>Enter the item you are interested in from Freecycle Oakland:</h2>
 
-<table>
-  <tr>
-    <th>Userid</th>
-    <th>Querystr</th>
-    <th>Datestart</th>
-    <th>Dateend</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @searches.each do |search| %>
-  <tr>
-    <td><%= search.userid %></td>
-    <td><%= search.querystr %></td>
-    <td><%= search.datestart %></td>
-    <td><%= search.dateend %></td>
-    <td><%= link_to 'Show', search %></td>
-    <td><%= link_to 'Edit', edit_search_path(search) %></td>
-    <td><%= link_to 'Destroy', search, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<form action="<%= searches_path + '/freecycle/' %>" method="get">
 
-<br />
+  <input class="entryform-field" name="address" value="" id="addressfield"/>
+    <p class="eg">e.g. Couch</p>
+  <div class="buttondiv">
+    <input class="button" id="submitbutton" type="submit" value="submit"/>
+   
+  </div>
+<!-- <a href="#" id="locateme">use my current location </a>  -->
+</form>
 
-<%= link_to 'New Search', new_search_path %>
+<div class="sms">
+<p>or, text message your item search term to:</p>
+<h1>1 (510) 606-8706</h1>
+</div>
+
