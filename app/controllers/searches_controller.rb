@@ -68,6 +68,35 @@ class SearchesController < ApplicationController
       end
     end
   end
+  
+  # GET /retailers/finditem/:item
+  def finditem
+    listing = get_item_from_freecycle(params[:item])
+    respond_to do |format|
+      # Not sure how this format stuff works - need to test this. snapfresh was using an object, but here I'm using a non @-sign hash...
+      format.html # show.html.erb
+      format.xml  { render :xml => listing}
+      format.text { render :text => listing.to_enum(:each_with_index).map{|r, i| r.info = "#{i+1}: #{r.info}\n"}.join("\n\n")}
+    end
+  end
+
+  def get_item_from_freecycle(item)
+    baseurl = "http://groups.freecycle.org/oaklandfreecycle/posts/search?search_words="+item+"&include_offers=on&include_wanteds=off&date_start=2011-02-01"
+    # Freecycle returns results in an HTML format thats gonna have to be parsed
+    url = URI.parse(baseurl)
+    request = Net::HTTP::Post.new(url.path)
+    response = Net::HTTP.new(url.host, url.port).start {|http| http.request(request)}
+    doc = Nokogiri::HTML.parse(response.body)
+    doc.search('td').each do |td|
+  #item = td.search('strong').text
+  #date = td.search('').text
+      info = td.text
+  #date = td.xpath("//OutputGeocode/Longitude").text;
+  #itemtitle = td.
+      itemhash = { :listing => info }
+    end
+    return itemhash
+  end
 
   # DELETE /searches/1
   # DELETE /searches/1.xml
