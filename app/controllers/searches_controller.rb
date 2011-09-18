@@ -1,6 +1,8 @@
 class SearchesController < ApplicationController
   # GET /searches
   # GET /searches.xml
+  require "net/http"
+  require "nokogiri"
   def index
     #@searches = Search.all
 
