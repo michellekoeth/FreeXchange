@@ -1,0 +1,11 @@
+<h2 id="listhead">Items from FreeCycle</h2>
+
+<div class="general">
+  <ul class="shop-list">
+    <% listing.each do |listingitem,info| %>
+      <li class="shop-list">
+        <div class="shop-list-name"><%= listingitem %>, <%= info %></div>
+      </li>
+    <% end %>
+  </ul>
+</div>

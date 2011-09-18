@@ -69,9 +69,9 @@ class SearchesController < ApplicationController
     end
   end
   
-  # GET /retailers/finditem/:item
+  # GET /searches/finditem/:item
   def finditem
-    listing = get_item_from_freecycle(params[:item])
+    listing = get_item_from_freecycle_oakland(params[:item])
     respond_to do |format|
       # Not sure how this format stuff works - need to test this. snapfresh was using an object, but here I'm using a non @-sign hash...
       format.html # show.html.erb
@@ -80,7 +80,7 @@ class SearchesController < ApplicationController
     end
   end
 
-  def get_item_from_freecycle(item)
+  def get_item_from_freecycle_oakland(item)
     baseurl = "http://groups.freecycle.org/oaklandfreecycle/posts/search?search_words="+item+"&include_offers=on&include_wanteds=off&date_start=2011-02-01"
     # Freecycle returns results in an HTML format thats gonna have to be parsed
     url = URI.parse(baseurl)

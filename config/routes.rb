@@ -1,4 +1,5 @@
 FreeXChange::Application.routes.draw do
+  match 'searches/:item' => 'searches#finditem'
   resources :listings
 
   resources :searches
@@ -10,7 +11,7 @@ FreeXChange::Application.routes.draw do
   root :to => "searches#index"
   
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+  
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
