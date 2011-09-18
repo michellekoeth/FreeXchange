@@ -1,9 +1,12 @@
 FreeXChange::Application.routes.draw do
-  match 'searches/:item' => 'searches#finditem'
   resources :listings
 
-  resources :searches
-
+  resources :searches do
+    collection do
+      get "finditem"
+    end
+  end
+  
   devise_for :users
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   # The priority is based upon order of creation:

@@ -83,6 +83,7 @@ class SearchesController < ApplicationController
   def get_item_from_freecycle_oakland(item)
     baseurl = "http://groups.freecycle.org/oaklandfreecycle/posts/search?search_words="+item+"&include_offers=on&include_wanteds=off&date_start=2011-02-01"
     # Freecycle returns results in an HTML format thats gonna have to be parsed
+    puts baseurl
     url = URI.parse(baseurl)
     request = Net::HTTP::Post.new(url.path)
     response = Net::HTTP.new(url.host, url.port).start {|http| http.request(request)}
