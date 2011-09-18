@@ -2,9 +2,9 @@
 
 <div class="general">
   <ul class="shop-list">
-    <% listing.each do |listingitem,info| %>
+    <% @listing.each do |item,info| %>
       <li class="shop-list">
-        <div class="shop-list-name"><%= listingitem %>, <%= info %></div>
+        <div class="shop-list-name"><%= item %>, <%= info %></div>
       </li>
     <% end %>
   </ul>
