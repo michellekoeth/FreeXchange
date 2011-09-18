@@ -83,20 +83,52 @@ class SearchesController < ApplicationController
   end
 
   def get_item_from_freecycle_oakland(item)
-    baseurl = "http://groups.freecycle.org/oaklandfreecycle/posts/search?search_words="+item+"&include_offers=on&include_wanteds=off&date_start=2011-02-01"
-    # Freecycle returns results in an HTML format thats gonna have to be parsed
-    puts "The base url is: " + baseurl
-    url = URI.parse(baseurl)
+    url = URI.parse('http://groups.freecycle.org/oaklandfreecycle/posts/search?')
     request = Net::HTTP::Post.new(url.path)
+    request.set_form_data({
+            "search_words"=>item,
+            "include_offers"=>"on",
+            "include_wanteds"=>"off",
+            "date_start"=>"2011-07-01",
+            "date_end"=>"2011-09-15",
+            "resultsperpage"=>"3"
+        })
+    #puts "http://groups.freecycle.org/oaklandfreecycle/posts/search?" + request.body
     response = Net::HTTP.new(url.host, url.port).start {|http| http.request(request)}
     doc = Nokogiri::HTML.parse(response.body)
-    puts doc
+    info = ""
+    re1='((?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Tues|Thur|Thurs|Sun|Mon|Tue|Wed|Thu|Fri|Sat))'	# Day Of Week 1
+    re2='.*?'	# Non-greedy match on filler
+    re3='((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?))'	# Month 1
+    re4='.*?'	# Non-greedy match on filler
+    re5='(\\d)'	# Any Single Digit 1
+    re6='.*?'	# Non-greedy match on filler
+    re7='((?:(?:[0-1][0-9])|(?:[2][0-3])|(?:[0-9])):(?:[0-5][0-9])(?::[0-5][0-9])?(?:\\s?(?:am|AM|pm|PM))?)'	# HourMinuteSec 1
+    re8='.*?'	# Non-greedy match on filler
+    re9='((?:(?:[1]{1}\\d{1}\\d{1}\\d{1})|(?:[2]{1}\\d{3})))(?![\\d])'	# Year 1
+    rereal=(re1)
+    redate=(re1+re2+re3+re4+re5+re6+re7+re8+re9)
+    mdate=Regexp.new(redate,Regexp::IGNORECASE);
+    m=Regexp.new(rereal,Regexp::IGNORECASE);
+    datelistingstr = ""
+    foo = ""
     itemhash = doc.search('td').map do |td|
-  #item = td.search('strong').text
-  #date = td.search('').text
-  #date = td.xpath("//OutputGeocode/Longitude").text;
-  #itemtitle = td.
-      { :listing => td.text }
+    #info = info + td.text
+      if td.text != " "
+        if mdate.match(td.text)
+          #dayofweek1=mdate.match(td.text)[1];
+          #month1=mdate.match(td.text)[2];
+          #d1=mdate.match(td.text)[3];
+          #time1=mdate.match(td.text)[4];
+          #year1=mdate.match(td.text)[5];
+          datelistingstr = td.text
+          foo = ""
+          #puts "date: " + datelistingstr
+        else
+          #puts "date: " + datelistingstr + " , item: " + td.text
+          { :dateoflisting => datelistingstr, :listing => td.text }
+        end
+      end
     end
     return itemhash
   end

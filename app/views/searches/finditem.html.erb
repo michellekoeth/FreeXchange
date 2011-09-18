@@ -2,10 +2,12 @@
 
 <div class="general">
   <ul class="shop-list">
-    <% @listing.each do |item,info| %>
-      <li class="shop-list">
-        <div class="shop-list-name"><%= item %>, <%= info %></div>
-      </li>
+    <% @listing.each do |dateoflisting,item| %>
+      <% if (dateoflisting != "") && (dateoflisting) %>
+        <li class="shop-list">
+          <div class="shop-list-name"><%= dateoflisting %><%= item %></div>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
