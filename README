@@ -1,256 +1,139 @@
-== Welcome to Rails
+FreeXchange - Bridging the digital divide for Freecycle communities. This app provides a multi-faceted txt message and 
+voice based interface for getting listings and following up on listings posted to Freecycle. Users of Freecycle no
+longer will need to sit by a computer 24x7 to be a first responder to a Freecycle listing. Instead, the FreeXchange
+system will push a TXT message to a user when a listing meeting a user's criteria appears, and can even automatically
+respond to the listor via TXT message OR via voice commands spoken via phone. In this way, people without computers
+can engage with Freecycle and also be able to receive needed items. Many of the neediest users of Freecycle do not
+have a computer or easy internet access. With FreeXchange, you can be sure that those folks most neediest for free
+items have EQUAL access to the Freecycle system.
 
-Rails is a web-application framework that includes everything needed to create
-database-backed web applications according to the Model-View-Control pattern.
-
-This pattern splits the view (also called the presentation) into "dumb"
-templates that are primarily responsible for inserting pre-built data in between
-HTML tags. The model contains the "smart" domain objects (such as Account,
-Product, Person, Post) that holds all the business logic and knows how to
-persist themselves to a database. The controller handles the incoming requests
-(such as Save New Account, Update Product, Show Post) by manipulating the model
-and directing data to the view.
-
-In Rails, the model is handled by what's called an object-relational mapping
-layer entitled Active Record. This layer allows you to present the data from
-database rows as objects and embellish these data objects with business logic
-methods. You can read more about Active Record in
-link:files/vendor/rails/activerecord/README.html.
-
-The controller and view are handled by the Action Pack, which handles both
-layers by its two parts: Action View and Action Controller. These two layers
-are bundled in a single package due to their heavy interdependence. This is
-unlike the relationship between the Active Record and Action Pack that is much
-more separate. Each of these packages can be used independently outside of
-Rails. You can read more about Action Pack in
-link:files/vendor/rails/actionpack/README.html.
+FreeXchange is built using Ruby on Rails with a SQLite database.
 
 
-== Getting Started
+Current Dev Team: Karla (Design Lead), Michelle (Project Lead), Talin (Development Lead), James (Testing and Documentation Lead)
 
-1. At the command prompt, create a new Rails application:
-       <tt>rails new myapp</tt> (where <tt>myapp</tt> is the application name)
+MVP Technical Specification (Talin is dev lead with Michelle assisting)
 
-2. Change directory to <tt>myapp</tt> and start the web server:
-       <tt>cd myapp; rails server</tt> (run with --help for options)
+-- Current Hurdles:
 
-3. Go to http://localhost:3000/ and you'll see:
-       "Welcome aboard: You're riding Ruby on Rails!"
-
-4. Follow the guidelines to start developing your application. You can find
-the following resources handy:
-
-* The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html
-* Ruby on Rails Tutorial Book: http://www.railstutorial.org/
+    How to log someone in to Freecycle via an apish way - currently the login form code is the following:
 
 
-== Debugging Rails
+<form method='post' action='http://my.freecycle.org/login' id='loginform'><fieldset>
+Note: There is a way to login and still stay on the same listing page afterwards, thats what this referer value is:    <input type='hidden' name='referer' value="http://groups.freecycle.org/oaklandfreecycle/posts/14698167/Charcoal%20Grill" />
+  <label for='username'>Username :</label>
+   <input type='text' name='username' id='username' /><br />
+   <label for='pass'>Password : </label>
+   <input type='password' name='pass' id='pass' /><br />
+   <label for='keeploggedin'>Remember my login : </label>
+   <input type='checkbox' name='keeploggedin' checked='checked' id='keeploggedin' /><br />
+  <input type='submit' value='Log in' />
 
-Sometimes your application goes wrong. Fortunately there are a lot of tools that
-will help you debug it and get it back on the rails.
-
-First area to check is the application log files. Have "tail -f" commands
-running on the server.log and development.log. Rails will automatically display
-debugging and runtime information to these files. Debugging info will also be
-shown in the browser on requests from 127.0.0.1.
-
-You can also log your own messages directly into the log file from your code
-using the Ruby logger class from inside your controllers. Example:
-
-  class WeblogController < ActionController::Base
-    def destroy
-      @weblog = Weblog.find(params[:id])
-      @weblog.destroy
-      logger.info("#{Time.now} Destroyed Weblog ID ##{@weblog.id}!")
-    end
-  end
-
-The result will be a message in your log file along the lines of:
-
-  Mon Oct 08 14:22:29 +1000 2007 Destroyed Weblog ID #1!
-
-More information on how to use the logger is at http://www.ruby-doc.org/core/
-
-Also, Ruby documentation can be found at http://www.ruby-lang.org/. There are
-several books available online as well:
-
-* Programming Ruby: http://www.ruby-doc.org/docs/ProgrammingRuby/ (Pickaxe)
-* Learn to Program: http://pine.fm/LearnToProgram/ (a beginners guide)
-
-These two books will bring you up to speed on the Ruby language and also on
-programming in general.
+    The api way to send a response to a particular listing (currently its done via some form). Freecycle is fairly easy to hack though because it seems like they are using some RESTful by default framework.. For ex, this is the HTML code listed for responding to a listing - its a simple POST to a restful API: (I’m wondering - do you even need to be logged in to do this? I guess so though because you can only access the “reply to listing” feature once you’re logged in, and presumably your freecycle account contains your email address - so the “from” email is a session variable of some sort. Can we get past not having this session variable?)
 
 
-== Debugger
+<form method='post' action='http://groups.freecycle.org/oaklandfreecycle/posts/reply/14698387' style='text-align: center' id='replyform'>
 
-Debugger support is available through the debugger command when you start your
-Mongrel or WEBrick server with --debugger. This means that you can break out of
-execution at any point in the code, investigate and change the model, and then,
-resume execution! You need to install ruby-debug to run the server in debugging
-mode. With gems, use <tt>sudo gem install ruby-debug</tt>. Example:
+ <label for='reply_body'>Message to send to the person who made this Post:</label><br />
+ <textarea name='reply_body' id='reply_body' rows='8' style='width:80%; margin: 0px auto;'></textarea><br />
 
-  class WeblogController < ActionController::Base
-    def index
-      @posts = Post.find(:all)
-      debugger
-    end
-  end
-
-So the controller will accept the action, run the first line, then present you
-with a IRB prompt in the server window. Here you can do things like:
-
-  >> @posts.inspect
-  => "[#<Post:0x14a6be8
-          @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>,
-       #<Post:0x14a6620
-          @attributes={"title"=>"Rails", "body"=>"Only ten..", "id"=>"2"}>]"
-  >> @posts.first.title = "hello from a debugger"
-  => "hello from a debugger"
-
-...and even better, you can examine how your runtime objects actually work:
-
-  >> f = @posts.first
-  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>
-  >> f.
-  Display all 152 possibilities? (y or n)
-
-Finally, when you're ready to resume execution, you can enter "cont".
+<input type='submit' value='Send Message' />
 
 
-== Console
+I. Web Functionality:
 
-The console is a Ruby shell, which allows you to interact with your
-application's domain model. Here you'll have all parts of the application
-configured, just like it is when the application is running. You can inspect
-domain models, change values, and save to the database. Starting the script
-without arguments will launch it in the development environment.
-
-To start the console, run <tt>rails console</tt> from the application
-directory.
-
-Options:
-
-* Passing the <tt>-s, --sandbox</tt> argument will rollback any modifications
-  made to the database.
-* Passing an environment name as an argument will load the corresponding
-  environment. Example: <tt>rails console production</tt>.
-
-To reload your controllers and models after launching the console run
-<tt>reload!</tt>
-
-More information about irb can be found at:
-link:http://www.rubycentral.com/pickaxe/irb.html
+    List items currently offered from entered search term. Provide link back to Freecycle listing for each item found. Search criteria:
+        item description (i.e. couch)
+        date range. Default the date range for a 2 month period.
+        freecycle group (done on a city basis (I think))
+        neighborhood (within the city)
+    Ability to set up/configure notifications for all future postings. Configuration options:
+        item description (and provide for alternative descriptions? (couch, sofa, loveseat, sectional, recliner)
+        freecycle group
+        neighborhood
+        Text of standard response to send to a freecycle lister upon the user finding an item they want.
+    Internationalization - Spanish (we’ll focus efforts on Spanish for MVP)
 
 
-== dbconsole
 
-You can go to the command line of your database directly through <tt>rails
-dbconsole</tt>. You would be connected to the database with the credentials
-defined in database.yml. Starting the script without arguments will connect you
-to the development database. Passing an argument will connect you to a different
-database, like <tt>rails dbconsole production</tt>. Currently works for MySQL,
-PostgreSQL and SQLite 3.
 
-== Description of Contents
+II. SMS based functionality
 
-The default directory structure of a generated Ruby on Rails application:
+    Basic reporting feature via TXT input, TXT output: (we will have to tackle how best to convey a freecycle listing and URL in as little chars as possible)
+        Send text to registered Tropo number - 1 (510) 606-8706, with a request of the following format: item, max # of listings to send back, group, neighborhood, date span.
+            Defaults (i.e. if this parameter is not entered, what is assumed):
+                item - any item
+                max # of listings - 3
+                group - Oakland Freecycle group
+                neighborhood - any neighborhood
+                date span - two months prior from current date (this is a number the user enters which indicates the number of months the system should look back for listings)
+            An empty request (ie no parameters sent) will return the first three listings from Oakland freecycle with a SHORTENED url to the freecycle listing.
+            A request with just the item parameter will return the first three listings from Oakland freecycle of that item. (Listing being the shortened URL and item description)
+            A request with just the item and max # of listings will return up to the max # of listings of the item from Oakland freecycle with shortened URL
+            A request with item, max # of listings and group parameters will return the max # of listings from the specified freecycle group listing for the specified item. With shortened URL
+            A request with item, max # of listings, group, and neighborhood parameters will return the max # of listings from the specified freecycle group and neighborhood for the specified item
+            Same as iv, but now restricted by the date span.
+    Basic reporting feature via TXT input, Phone output: - response of txt request is done VIA phone:
 
-  |-- app
-  |   |-- controllers
-  |   |-- helpers
-  |   |-- mailers
-  |   |-- models
-  |   `-- views
-  |       `-- layouts
-  |-- config
-  |   |-- environments
-  |   |-- initializers
-  |   `-- locales
-  |-- db
-  |-- doc
-  |-- lib
-  |   `-- tasks
-  |-- log
-  |-- public
-  |   |-- images
-  |   |-- javascripts
-  |   `-- stylesheets
-  |-- script
-  |-- test
-  |   |-- fixtures
-  |   |-- functional
-  |   |-- integration
-  |   |-- performance
-  |   `-- unit
-  |-- tmp
-  |   |-- cache
-  |   |-- pids
-  |   |-- sessions
-  |   `-- sockets
-  `-- vendor
-      `-- plugins
+        User queries system as detailed above, but as a last parameter, enters “phone” so a sample query would be: couch, 3, Oakland, temescal, 2, phone
+            System returns a message via txt of the following format: “Thank you for your query. There are couches available on Freecycle right now. Please call 510-606-8706 and when prompted, enter the code 1234 for the listing of couches in Oakland.” (or phone number is stored, and then when Tropo sees that when that phone number has called, the messages corresponding to that phone number are “delievered” - like a phone mail system).
 
-app
-  Holds all the code that's specific to this particular application.
+    Basic Response to Listing via TXT
 
-app/controllers
-  Holds controllers that should be named like weblogs_controller.rb for
-  automated URL mapping. All controllers should descend from
-  ApplicationController which itself descends from ActionController::Base.
+        User can click on shortened URL from text and then pursue accordingly
+        User can text the freecycle item number, and group, and get back the detailed listing via TXT message, and then follow up on their own accordingly
+        User can text the freecycle item number, group, and the keyword “auto” and an automated email (according to user prefs linked to that user’s phone number - if no such user prefs, than a default template email will be sent) - have an automated email is sent to the freecycle lister stating something like “Hello - I am very interested in your [ITEM], but I do not have ready access to an email account. Please call or text message me at [USER NUMBER] if the item is still available to arrange a pickup time. Thanks so much.”
 
-app/models
-  Holds models that should be named like post.rb. Models descend from
-  ActiveRecord::Base by default.
 
-app/views
-  Holds the template files for the view that should be named like
-  weblogs/index.html.erb for the WeblogsController#index action. All views use
-  eRuby syntax by default.
+  4.    Basic Response to Listing via Phone
 
-app/views/layouts
-  Holds the template files for layouts to be used with views. This models the
-  common header/footer method of wrapping views. In your views, define a layout
-  using the <tt>layout :default</tt> and create a file named default.html.erb.
-  Inside default.html.erb, call <% yield %> to render the view using this
-  layout.
+    This will be done when the user calls the system to retrieve their listings. At that time, the system will prompt them as to whether they want to respond or not. If they choose that they want to respond, the system will send an email on the user’s behalf with the standard text shown above in 3(d).
 
-app/helpers
-  Holds view helpers that should be named like weblogs_helper.rb. These are
-  generated for you automatically when using generators for controllers.
-  Helpers can be used to wrap functionality for your views into methods.
 
-config
-  Configuration files for the Rails environment, the routing map, the database,
-  and other dependencies.
+5.      Freecycle registration feature? Allow users to sign up for a Freecycle of their choosing via TXT or voice?
 
-db
-  Contains the database schema in schema.rb. db/migrate contains all the
-  sequence of Migrations for your schema.
 
-doc
-  This directory is where your application documentation will be stored when
-  generated using <tt>rake doc:app</tt>
 
-lib
-  Application specific libraries. Basically, any kind of custom code that
-  doesn't belong under controllers, models, or helpers. This directory is in
-  the load path.
+III. Voice Based Functionality
 
-public
-  The directory available for the web server. Contains subdirectories for
-  images, stylesheets, and javascripts. Also contains the dispatchers and the
-  default HTML files. This should be set as the DOCUMENT_ROOT of your web
-  server.
+    People call the number, and enter information when prompted - like “What are you looking for?” (couch), “OK, what neighborhood are you looking for, please say neighborhood name, or ALL for any neighborhood.”
+    The voice system will need to be heavily documented because now we are folding in geographical dependencies (i.e. name of neighborhoods) as a data depwendency to scaling this app out to other towns/freecycle communities.
 
-script
-  Helper scripts for automation and generation.
 
-test
-  Unit and functional tests along with fixtures. When using the rails generate
-  command, template test files will be generated for you and placed in this
-  directory.
 
-vendor
-  External libraries that the application depends on. Also includes the plugins
-  subdirectory. If the app has frozen rails, those gems also go here, under
-  vendor/rails/. This directory is in the load path.
+
+
+Data Models:
+
+    Users
+        userid - default
+        phone number - string - added in migration
+        freecycgroup - string - added in migration
+        email - string
+        encrypted_password - string
+    Searches
+        searchid - INDEX
+        freecycsearchgroup - string - added in migration
+        freecycsearchhood - string - added in migration
+        userid (User) - FK, integer - FK relation in model
+        querystr - string
+        datestart - text
+        dateend - text
+        created_at - datetime
+        updated_at - datetime
+    Listings
+        listingid - default
+        searchid - FK, integer - FK relation in model
+        freecycgroup - string
+        freecychood - string
+        freecyclistid - string
+        dateposted - text
+        created_at - datetime
+        updated_at - datetime
+
+
+
+
+Infrastructure Specs:
+Heroku Instance: http://freexchange.heroku.com/
+Rails github repo: https://github.com/jerseycoder/FreeXChange
