@@ -93,17 +93,19 @@ input,select
 
 body
 {
-	font-family: Helvetica, arial, sans-serif;
+  font-family: 'Comfortaa', Helvetica, arial, sans-serif;
 	padding: 0 auto;
 	margin: 0 auto;
 	width: 288px;
-	background: #c7577e;
-	color:#4a212f;
+	background: white;
+	color: #F78127;
 	text-align:center;
 
 }
 body .general,body #credits
 {
+  font-family: 'Comfortaa', Helvetica, arial, sans-serif;
+  font color: #21AABD;
 	width: 248px;
 	margin-right: 10px;
 	margin-left: 10px;
@@ -114,7 +116,7 @@ body .general,body #credits
 body .tablet,body .desktop,body .hello,body .hdtv
 {
 	display: none;
-	font-family: Helvetica, arial, sans-serif;
+  font-family: 'Comfortaa', Helvetica, arial, sans-serif;
 }
 
 h1 {
@@ -124,9 +126,9 @@ h1 {
 	display;block;
 	font-weight: bold;
  /*   text-transform: uppercase;*/
-    color:#4a212f;/*#ACBF8F;*/
+    color:#21AABD;/*#ACBF8F;*/
     text-align:center;
-    font-size:4em;
+    font-size:2em;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 /*    text-shadow: 0 0 4px #fff;  horizontal-offset vertical-offset 'blur' colour 
   -moz-text-shadow: 0 0 4px #fff;
@@ -135,6 +137,7 @@ h1 {
 }
 
 h2{
+  font-family: 'Comfortaa', Helvetica, arial, sans-serif;
     margin-top: 20px;
     width:100%;
     font-size:1em;
@@ -173,9 +176,9 @@ form input, form select
 {
 	
     font: 14px Helvetica, Arial, sans-serif;
-    background-color: #ACBF8F;
+    background-color: #FEE2CC;
     border: none;
-    color: #394C1B;
+    color: #BE4D2B;
     outline: none;
     resize: none;
     height: 35px;
@@ -202,24 +205,25 @@ form input, form select
 }
 
 .button{
-    background-color:#659A34;
+    background-color:#21AABD;
     display: block;
     padding: 0 0 0 0;
-    background: #ACBF8F;
+    background: #7AD1D3;
     border:0px;
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
-    color:#394C1B;
+    color:#0A9093;
     width: 50%;
     height:35px;
     text-align: center;
     font-weight: bold;
+    font-family: 'Comfortaa', Helvetica, arial, sans-serif;
     text-transform: uppercase;
     font-size: 12px;
-    -moz-box-shadow: 2px 2px 2px #394C1B;
-	-webkit-box-shadow: 2px 2px 2px #394C1B;
-	 box-shadow: 2px 2px 2px #394C1B;
+    -moz-box-shadow: 2px 2px 2px #0A9093;
+	-webkit-box-shadow: 2px 2px 2px #0A9093;
+	 box-shadow: 2px 2px 2px #0A9093;
     
 }
 
@@ -304,8 +308,9 @@ font-family:Helvetica,Arial,sans-serif;
 
 .sms h1{
 
-font-family: Helvetica, Arial, sans-serif;
- font-size:2em;
+ font-family: 'Comfortaa', Helvetica, arial, sans-serif;
+ font-weight:bold
+ font-size:12em
  text-shadow: none;
 
 }
@@ -347,14 +352,14 @@ body .general
 }
 body #credits
 {
-    font-family:Helvetica,Arial,sans-serif;
+  font-weight:bold
 	width: 536px;
 	margin:auto;
 	color:#283613;
 	display:block;
 	clear:both;
 	width:80%;
-	text-align:justify;
+	text-align:center;
 	padding-top: 30px;
 	font-size:1em;
 	line-height:150%
@@ -384,10 +389,10 @@ line-height:150%
 
 }
 
-a:link {text-decoration: none; color:#ACBF8F;}
-a:visited {text-decoration: none; color:#ACBF8F;}
-a:active {text-decoration: none; color:#fff;}
-a:hover {text-decoration: underline; color:#fff;}
+a:link {text-decoration: none; color:#21AABD;}
+a:visited {text-decoration: none; color:#027982;}
+a:active {text-decoration: none; color:#21AABD;}
+a:hover {text-decoration: underline; color:#42C7D1;}
 
 
 
