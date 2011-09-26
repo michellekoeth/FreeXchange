@@ -143,7 +143,6 @@ h2{
     margin-top: 20px;
     width:100%;
     font-size:1em;
-    text-align:justify;
     font-weight:normal;
 
 }
@@ -169,6 +168,7 @@ h2{
 
 form 
 {
+  padding-top: 20px;
 	margin:auto;
 	width:100%
 
@@ -388,6 +388,7 @@ line-height:150%
 
 #credits img {
     vertical-align:text-bottom;
+    padding: 40px;
 
 }
 
