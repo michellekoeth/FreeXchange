@@ -1,16 +1,13 @@
 <h2>Enter the item you are interested in from Freecycle Oakland:</h2>
 
-
-<form action="<%= finditem_searches_path %>" method="get">
-
-  <input class="entryform-field" name="item" value="" id="addressfield"/>
-    <p class="eg">e.g. Couch</p>
+<%= form_for :search, :url => finditem_searches_path, :method=>"get" do |f| %>
+  <%= f.text_field  :search_words, :class=>"entryform-field" %>
+  <%= f.text_field  :group_name, :class=>"entryform-field", :value=>"oaklandfreecycle" %>
+  <p class="eg">e.g. Couch</p>
   <div class="buttondiv">
-    <input class="button" id="submitbutton" type="submit" value="submit"/>
-   
+    <%= f.submit :value=>"submit", :class=>"button" %>
   </div>
-<!-- <a href="#" id="locateme">use my current location </a>  -->
-</form>
+<% end %>
 
 <div class="sms">
 <p>or, text message your item search term to:</p>

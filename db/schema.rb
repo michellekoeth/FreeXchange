@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,10 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110829015300) do
+ActiveRecord::Schema.define(:version => 20110926015311) do
 
   create_table "listings", :force => true do |t|
-    t.integer  "searchid"
+    t.integer  "search_id"
     t.string   "freecycgroup"
     t.string   "freecychood"
     t.integer  "freecyclistid"
@@ -22,13 +23,26 @@ ActiveRecord::Schema.define(:version => 20110829015300) do
     t.datetime "updated_at"
   end
 
-  create_table "searches", :force => true do |t|
-    t.integer  "userid"
-    t.string   "querystr"
-    t.text     "datestart"
-    t.text     "dateend"
+  create_table "rails_admin_histories", :force => true do |t|
+    t.string   "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 5
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "searches", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "group_name"
+    t.string   "neighborhood"
+    t.string   "search_words"
   end
 
   create_table "users", :force => true do |t|
@@ -48,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20110829015300) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phonenumber"
+    t.string   "group_name"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
