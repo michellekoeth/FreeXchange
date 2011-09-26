@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926013242) do
+ActiveRecord::Schema.define(:version => 20110926015311) do
 
   create_table "listings", :force => true do |t|
     t.integer  "search_id"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20110926013242) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phonenumber"
-    t.string   "freecycgroup"
+    t.string   "group_name"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
