@@ -74,6 +74,7 @@ abbr[title],dfn[title]
 
 table
 {
+  font-family: 'Comfortaa', Helvetica, arial, sans-serif;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
@@ -122,7 +123,6 @@ body .tablet,body .desktop,body .hello,body .hdtv
 }
 
 h1 {
-	font-family: 'Pacifico', script, arial, serif;
 	padding:30px 0px 45px 0px;
 	margin:0 auto;
 	display;block;
@@ -139,7 +139,7 @@ h1 {
 }
 
 h2{
-  font-family: 'Comfortaa', Helvetica, arial, sans-serif;
+    font-family: 'Comfortaa', Helvetica, arial, sans-serif;
     margin-top: 20px;
     width:100%;
     font-size:1em;
@@ -176,10 +176,10 @@ form
 
 form input, form select 
 {
-	
-    font: 14px Helvetica, Arial, sans-serif;
+    font: 14px 'Comfortaa', Helvetica, arial, sans-serif;
     background-color: #FCF2EB;
     border: none;
+    padding: 2px;
     color: #BE4D2B;
     outline: none;
     resize: none;
@@ -283,7 +283,7 @@ form input, form select
 	border-top: 1px solid #394C1B;
 	width: 100%;
 	font-variant:small-caps;
-    text-transform:capitalize;
+  text-transform:capitalize;
 }
 
 .shop-list li a { 
@@ -377,13 +377,13 @@ margin: 0 auto;
 }
 
 #credits p{
-    font-family:Helvetica,Arial,sans-serif;
-font-size:1em;
-width:100%;
-margin: auto;
-text-align:center;
-padding:20px 0px 10px 0px;
-line-height:150%
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:1em;
+  width:100%;
+  margin: auto;
+  text-align:center;
+  padding:20px 0px 10px 0px;
+  line-height:150%
 }
 
 #credits img {
