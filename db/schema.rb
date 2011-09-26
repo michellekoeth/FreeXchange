@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110829015300) do
+ActiveRecord::Schema.define(:version => 20110918000312) do
 
   create_table "listings", :force => true do |t|
-    t.integer  "searchid"
+    t.integer  "search_id"
     t.string   "freecycgroup"
     t.string   "freecychood"
     t.integer  "freecyclistid"
@@ -22,19 +22,33 @@ ActiveRecord::Schema.define(:version => 20110829015300) do
     t.datetime "updated_at"
   end
 
+  create_table "rails_admin_histories", :force => true do |t|
+    t.string   "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 5
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
   create_table "searches", :force => true do |t|
-    t.integer  "userid"
+    t.integer  "user_id"
     t.string   "querystr"
     t.text     "datestart"
     t.text     "dateend"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "freecycsearchgroup"
+    t.string   "freecycsearchhood"
   end
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -48,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20110829015300) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phonenumber"
+    t.string   "freecycgroup"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
