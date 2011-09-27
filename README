@@ -31,7 +31,16 @@ Note: There is a way to login and still stay on the same listing page afterwards
    <input type='checkbox' name='keeploggedin' checked='checked' id='keeploggedin' /><br />
   <input type='submit' value='Log in' />
 
-    The api way to send a response to a particular listing (currently its done via some form). Freecycle is fairly easy to hack though because it seems like they are using some RESTful by default framework.. For ex, this is the HTML code listed for responding to a listing - its a simple POST to a restful API: (I’m wondering - do you even need to be logged in to do this? I guess so though because you can only access the “reply to listing” feature once you’re logged in, and presumably your freecycle account contains your email address - so the “from” email is a session variable of some sort. Can we get past not having this session variable?)
+So, presumably http://my.freecycle.org/login?username=emfwave&pass=PASS
+
+Would log me in (given I replace PASS with my actual password)
+
+The api way to send a response to a particular listing (currently its done via some form). Freecycle is fairly 
+easy to hack though because it seems like they are using some RESTful by default framework.. 
+For ex, this is the HTML code listed for responding to a listing - its a simple POST to a restful API: 
+(I’m wondering - do you even need to be logged in to do this? I guess so though because you can only access the 
+“reply to listing” feature once you’re logged in, and presumably your freecycle account contains your email address 
+- so the “from” email is a session variable of some sort. Can we get past not having this session variable?)
 
 
 <form method='post' action='http://groups.freecycle.org/oaklandfreecycle/posts/reply/14698387' style='text-align: center' id='replyform'>
