@@ -1,4 +1,5 @@
 require 'net/http'
+require 'mechanize'
 
 module Freecycle
 
@@ -9,6 +10,13 @@ module Freecycle
     parsed = parse_onelisting(result.body)
   end
 
+  def respondtoofferFC(username,password,group_name,itemnumber)
+    #MMK to put mechanize code here for responding to an offer which is on the freecycle site itself
+  end
+  
+    def respondtoofferFCYG(username,password,group_name,itemnumber)
+    #MMK to put mechanize code here for responding to an offer which is on a freecycle yahoo group
+  end
   
   def listings(group_name,options)
     query = options.merge({
@@ -46,22 +54,29 @@ module Freecycle
     end
   end
   
-  def parse_onelisting(listings_html)
-    # I need to figure out what parsing schema to use - MMK
-    doc = Nokogiri::HTML.parse(listings_html)
-    doc.css("tr").map do |tr|
-      tds = tr.css("td")
-      date = tds[0].css("text()")[2].text
-      number = tds[0].css("text()")[3].text
-      title = tds[1].css("text()")[1].text
-      neighborhood = tds[1].css("text()")[2].text
-      {
-        :date=>Time.parse(date),
-        :number=>number.gsub(/\D/,''),
-        :title=>title.strip,
-        :neighborhood=>neighborhood.strip[1..-2] #strip surrounding parentheses
-      }
-    end
+  def parse_onelisting(listing_html)
+    # This function will parse out the detailed data for one listing
+    doc = Nokogiri::HTML.parse(listing_html)
+    trs = doc.css("tr") #gives you an array of all the trs
+    # skip the first one - so use the index 1 (index 0 is the first one)
+    #tds = tr[1].css("td")
+    #number = tds[0].css("text()")[0].text
+    #poster = tds[1].css("text()")[0].text
+    number = tr[1].css("td")[0].css("text()")[0].text
+    poster = tr[2].css("td")[0].css("text()")[0].text
+    # tr[3] just lists that it is an offer - we can skip
+    subject = tr[4].css("td")[0].css("text()")[0].text
+    neighborhood = tr[5].css("td")[0].css("text()")[0].text
+    description = tr[6].css("td")[0].css("text()")[0].text
+    date = tr[7].css("td")[0].css("text()")[0].text
+    {
+      :date=>Time.parse(date),
+      :number=>number.gsub(/\D/,''),
+      :neighborhood=>neighborhood
+      :description=>description
+      :poster=>poster
+      :subject=>subject
+    }
   end
 
 end
