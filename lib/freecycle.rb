@@ -69,14 +69,14 @@ module Freecycle
     neighborhood = tr[5].css("td")[0].css("text()")[0].text
     description = tr[6].css("td")[0].css("text()")[0].text
     date = tr[7].css("td")[0].css("text()")[0].text
-    {
-      :date=>Time.parse(date),
-      :number=>number.gsub(/\D/,''),
-      :neighborhood=>neighborhood
-      :description=>description
-      :poster=>poster
-      :subject=>subject
-    }
+   # {
+   #   :date=>Time.parse(date),
+   #   :number=>number.gsub(/\D/,''),
+   #   :neighborhood=>neighborhood
+   #   :description=>description
+   #   :poster=>poster
+   #   :subject=>subject
+    #}
   end
 
 end
