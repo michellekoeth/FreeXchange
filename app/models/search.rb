@@ -13,4 +13,11 @@ class Search < ActiveRecord::Base
   def current_results
     Freecycle::listings(self.group_name, "search_words"=>self.search_words)
   end
+
+  def new_results
+    return nil unless self.persisted? && self.updated_at? #must be a saved search.
+    results = Freecycle::listings(self.group_name, "search_words"=>self.search_words, "date_start" => self.updated_at.to_date.to_s)
+    results = results.take_while {|r| r[:number].to_i > self.last_itemnum.to_i} if self.last_itemnum
+    results
+  end
 end
