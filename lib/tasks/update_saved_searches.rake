@@ -4,7 +4,7 @@ task :update_saved_searches => :environment do
   searches.each do |s|
     new = s.new_results
     unless new.empty?
-      #TODO: send notification to user
+      s.user.notify_about_listings(s,new)
       s.update_attribute(:last_itemnum, new.first[:number])
     end
   end
