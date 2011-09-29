@@ -71,7 +71,8 @@ class ListingsController < ApplicationController
   
   # GET /listings/getlisting?number=&group_name=
   def getlisting
-    @listing = Listing.new(params[:number],params[:group_name]).detail_result
+    # @listing will be a hash
+    @listing = Listing.new({"number"=>params[:number], "group_name"=>params[:group_name]}).detail_listing
     
     respond_to do |format|
       format.html # getlisting.html.erb
