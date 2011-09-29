@@ -10,13 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929011402) do
+ActiveRecord::Schema.define(:version => 20110929013232) do
 
   create_table "listings", :force => true do |t|
     t.integer  "search_id"
     t.string   "group_name"
     t.string   "neighborhood"
-    t.integer  "number"
+    t.string   "number"
     t.text     "dateposted"
     t.datetime "created_at"
     t.datetime "updated_at"
