@@ -9,6 +9,8 @@ gem 'sqlite3'
 gem 'nokogiri'
 gem 'pg'
 
+gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -18,6 +20,7 @@ gem 'pg'
 gem 'fastercsv' # Only required on Ruby 1.8 and below
 gem 'devise'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'mechanize'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'

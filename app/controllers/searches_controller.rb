@@ -74,6 +74,7 @@ class SearchesController < ApplicationController
   # GET /searches/finditem/:item
   def finditem
     @listing = Search.new(params[:search]).current_results
+    @groupname = params[:search][:group_name]
     respond_to do |format|
       # Not sure how this format stuff works - need to test this. snapfresh was using an object, but here I'm using a non @-sign hash...
       format.html # show.html.erb
@@ -81,6 +82,7 @@ class SearchesController < ApplicationController
       format.text { render :text => @listing.to_enum(:each_with_index).map{|r, i| r.info = "#{i+1}: #{r.info}\n"}.join("\n\n")}
     end
   end
+
 
   # DELETE /searches/1
   # DELETE /searches/1.xml
