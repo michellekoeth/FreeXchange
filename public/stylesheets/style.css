@@ -179,11 +179,11 @@ form input, form select
     font: 14px 'Comfortaa', Helvetica, arial, sans-serif;
     background-color: #FCF2EB;
     border: none;
-    padding: 2px;
+    padding: 6px;
     color: #BE4D2B;
     outline: none;
     resize: none;
-    height: 35px;
+    height: 24px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
