@@ -19,13 +19,13 @@ module Freecycle
   end
   
   def listings(group_name,options)
-    query = options.merge({
+    query = {
       "include_offers"=>"on",
       "include_wanteds"=>"off",
       "date_start"=>(Date.today-2.weeks).to_s,
       "date_end"=>Date.today.to_s,
       "resultsperpage"=>"3"
-    })
+    }.merge(options)
     raise "missing required option: search_words" unless options["search_words"].present?
 
     result = retrieve_listings(group_name, query)
