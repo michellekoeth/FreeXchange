@@ -6,4 +6,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation
+
+  def notify_about_listings(search,new_listings)
+    message = "You have #{new_listings.length} results for '#{search.search_words}'"
+    message += ": "
+    message += new_listings.map {|l| "#{l[:title]} (#{l[:neighborhood]})"}*", "
+    $outbound_flocky.message(ENV['APP_NUMBER'], message, [self.phonenumber])
+  end
 end
