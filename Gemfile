@@ -9,6 +9,8 @@ gem 'sqlite3'
 gem 'nokogiri'
 gem 'pg'
 
+gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
