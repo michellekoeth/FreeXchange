@@ -2,12 +2,13 @@
 
 <div class="general">
   <ul class="shop-list">
-    <% @listing.each do |dateoflisting,item| %>
-      <% if (dateoflisting != "") && (dateoflisting) %>
+    <% @listing.each do |listing|%>
         <li class="shop-list">
-          <div class="shop-list-name"><%= dateoflisting %><%= item %></div>
+          <div class="shop-list-name">Item title: <%= listing[:title] %>
+          <P>
+          Click <%= link_to 'here for details', :controller=>"listings", :action => "getlisting", :group_name=>@groupname, :number=>listing[:number] %>
+          </div>
         </li>
-      <% end %>
     <% end %>
   </ul>
 </div>

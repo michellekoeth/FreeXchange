@@ -68,7 +68,17 @@ class ListingsController < ApplicationController
       end
     end
   end
-
+  
+  # GET /listings/getlisting?number=&group_name=
+  def getlisting
+    @listing = Listing.new(params[:number],params[:group_name]).detail_result
+    
+    respond_to do |format|
+      format.html # getlisting.html.erb
+      format.xml  { render :xml => @listing }
+    end
+  end
+  
   # DELETE /listings/1
   # DELETE /listings/1.xml
   def destroy

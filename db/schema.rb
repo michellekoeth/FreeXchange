@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,13 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926015311) do
+ActiveRecord::Schema.define(:version => 20110929011402) do
 
   create_table "listings", :force => true do |t|
     t.integer  "search_id"
-    t.string   "freecycgroup"
-    t.string   "freecychood"
-    t.integer  "freecyclistid"
+    t.string   "group_name"
+    t.string   "neighborhood"
+    t.integer  "number"
     t.text     "dateposted"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -48,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20110926015311) do
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

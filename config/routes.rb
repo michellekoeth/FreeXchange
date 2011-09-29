@@ -1,5 +1,10 @@
 FreeXChange::Application.routes.draw do
-  resources :listings
+ 
+  resources :listings do
+    collection do
+      get "getlisting"
+    end
+  end
 
   resources :searches do
     collection do
