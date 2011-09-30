@@ -8,6 +8,8 @@ gem 'rails', '3.1.0'
 gem 'sqlite3'
 gem 'nokogiri'
 gem 'pg'
+gem 'SystemTimer'
+gem 'json'
 
 gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
 

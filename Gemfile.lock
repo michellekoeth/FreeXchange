@@ -18,6 +18,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    SystemTimer (1.2.3)
     actionmailer (3.1.0)
       actionpack (= 3.1.0)
       mail (~> 2.3.0)
@@ -62,6 +63,7 @@ GEM
       multi_json
       multi_xml
     i18n (0.6.0)
+    json (1.6.1)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -139,9 +141,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  SystemTimer
   devise
   fastercsv
   flocky!
+  json
   mechanize
   nokogiri
   pg
