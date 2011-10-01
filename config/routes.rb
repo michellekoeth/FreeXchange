@@ -11,8 +11,16 @@ FreeXChange::Application.routes.draw do
       get "finditem"
     end
   end
+  match 'dashboard' => 'dashboard#show', :as => :dashboard_show
   
   devise_for :users
+  # will forward a URL of the format dashboard/1 to the dashboard controller, show function, and make a route called dashboard_show_path
+  
+  #resources :users do
+  #  collection do
+  #    get "show"
+  #  end
+  #end
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   # The priority is based upon order of creation:
   # first created -> highest priority.
