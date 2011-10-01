@@ -5,6 +5,7 @@
     <% @listing.each do |listing|%>
         <li class="shop-list">
           <div class="shop-list-name">Item title: <%= listing[:title] %>
+          <div class="shop-list-name">Neighborhood: <%= listing[:neighborhood] %>
           <P>
           Click <%= link_to 'here for details', :controller=>"listings", :action => "getlisting", :group_name=>@groupname, :number=>listing[:number] %>
           </div>

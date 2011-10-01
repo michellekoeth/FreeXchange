@@ -20,6 +20,8 @@
   </div>
     <%= hidden_field_tag 'group_name', current_user.group_name %>
   <div class="actions">
-    <%= f.submit %>
+    <div class="buttondiv">  
+    <%= f.submit :class=>"button"  %>
+    </div>
   </div>
 <% end %>

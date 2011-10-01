@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
-
+<h2 id="listhead">Items from FreeCycle</h2>
 <% @listing.each do |listing|%>
     <li class="shop-list">
         <div class="shop-list-name">Item title: <%= listing[:title] %>
+        <div class="shop-list-name">Neighborhood: <%= listing[:neighborhood] %>
           <P>Click <%= link_to 'here for details', :controller=>"listings", :action => "getlisting", :group_name=>@group_name, :number=>listing[:number] %>
         </div>
     </li>
 <% end %>
 
 
-<%= link_to 'Edit', edit_search_path(@search) %> |
-<%= link_to 'Back', searches_path %>
+<%= link_to 'Edit Your Search', edit_search_path(@search) %> |
+<%= link_to 'Dashboard', dashboard_show_path %>
