@@ -3,7 +3,7 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.label :email %><br />
+  <p><%= f.label "Username or Email" %><br />
   <%= f.email_field :email %></p>
 
   <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
@@ -17,6 +17,14 @@
   
   <p><%= f.label "Freecycle group name" %><br />
   <%= f.text_field :group_name %></p>
+  
+  <p><%= f.label "Your Freecycle Group" %><br/>
+  <% @g = Fcgroup.all %>
+  <select name="user[group_name]" id="user_group_name" style="height:30px; padding: 5px 0;">
+    <% @g.each do |g|%>
+      <option value="<%= g.group_name %>" <% if g.group_name == current_user.group_name %>selected="selected"<% end %>><%= g.group_name_human %></option>
+    <% end %>
+  </select>
 
   <p><%= f.label "Phone Number" %><br />
   <%= f.text_field :phonenumber %></p>
