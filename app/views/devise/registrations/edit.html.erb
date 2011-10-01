@@ -15,9 +15,6 @@
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
   
-  <p><%= f.label "Freecycle group name" %><br />
-  <%= f.text_field :group_name %></p>
-  
   <p><%= f.label "Your Freecycle Group" %><br/>
   <% @g = Fcgroup.all %>
   <select name="user[group_name]" id="user_group_name" style="height:30px; padding: 5px 0;">
