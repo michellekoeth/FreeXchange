@@ -4,8 +4,12 @@
   <%= devise_error_messages! %>
 
   <p><%= f.label "Your Freecycle Group" %><br/>
-  <%= f.text_field :group_name %></p>
-  
+  <% @g = Fcgroup.all %>
+  <select name="<%= :group_name %>" style="height:30px; padding: 5px 0;">
+    <% @g.each do |g|%>
+      <option value="<%= g.group_name %>"><%= g.group_name_human %></option>
+    <% end %>
+  </select>
   <p><%= f.label "Your Phone number (where you want to send/recieve text messages)" %><br />
     <%= f.text_field :phonenumber %></p>
   
