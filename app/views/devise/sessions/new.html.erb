@@ -10,9 +10,10 @@
 
   <% if devise_mapping.rememberable? -%>
     <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
-  <% end -%>
-
-  <p><%= f.submit "Sign in" %></p>
-<% end %>
+  <% end %>
+  <div class="buttondiv">
+  <p><%= f.submit "Sign in", :class=>"button" %></p>
+  </div>
+  <% end %>
 
 <%= render :partial => "devise/shared/links" %>
