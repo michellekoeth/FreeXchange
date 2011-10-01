@@ -38,6 +38,7 @@ module Freecycle
     raise "missing required option: search_words" unless options["search_words"].present?
 
     result = retrieve_listings(group_name, query)
+    #puts "Group name: " + group_name
     parsed = parse_listings(result.body)
   end
 

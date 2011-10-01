@@ -73,7 +73,7 @@ class ListingsController < ApplicationController
   def getlisting
     # @listing will be a hash
     @listing = Listing.new({"number"=>params[:number], "group_name"=>params[:group_name]}).detail_listing
-    
+    @groupname = params[:group_name]
     respond_to do |format|
       format.html # getlisting.html.erb
       format.xml  { render :xml => @listing }
