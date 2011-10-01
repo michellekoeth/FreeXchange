@@ -10,7 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110929013232) do
+ActiveRecord::Schema.define(:version => 20111001181956) do
+
+  create_table "fcgroups", :force => true do |t|
+    t.string  "group_name"
+    t.string  "group_name_human"
+    t.string  "region"
+    t.string  "state"
+    t.boolean "nativeToryahooF"
+    t.boolean "requireaccforviewpost"
+    t.boolean "requireaccforresppost"
+    t.string  "groupurl"
+    t.boolean "systemreg"
+  end
 
   create_table "listings", :force => true do |t|
     t.integer  "search_id"

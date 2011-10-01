@@ -3,10 +3,16 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.label :email %><br />
+  <p><%= f.label "Your Freecycle Group" %><br/>
+  <%= f.text_field :group_name %></p>
+  
+  <p><%= f.label "Your Phone number (where you want to send/recieve text messages)" %><br />
+    <%= f.text_field :phonenumber %></p>
+  
+  <p><%= f.label "username OR email" %><br />
   <%= f.email_field :email %></p>
 
-  <p><%= f.label :password %><br />
+  <p><%= f.label "Create a password (min 6 chars)" %><br />
   <%= f.password_field :password %></p>
 
   <p><%= f.label :password_confirmation %><br />
