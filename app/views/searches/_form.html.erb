@@ -10,23 +10,15 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :userid %><br />
-    <%= f.text_field :userid %>
+    <%= f.label :search_words %><br />
+    <%= f.text_field :search_words %>
   </div>
   <div class="field">
-    <%= f.label :querystr %><br />
-    <%= f.text_field :querystr %>
+    <%= f.label :neighborhood %><br />
+    <%= f.text_field :neighborhood %>
   </div>
-  <div class="field">
-    <%= f.label :datestart %><br />
-    <%= f.text_area :datestart %>
-  </div>
-  <div class="field">
-    <%= f.label :dateend %><br />
-    <%= f.text_area :dateend %>
-  </div>
+    <%= hidden_field_tag 'group_name', current_user.group_name %>
   <div class="actions">
     <%= f.submit %>
   </div>

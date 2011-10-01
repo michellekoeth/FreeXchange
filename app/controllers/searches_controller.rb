@@ -42,8 +42,8 @@ class SearchesController < ApplicationController
   # POST /searches
   # POST /searches.xml
   def create
-    @search = Search.new(params[:search])
-
+    @search = current_user.searches.new(params[:search])
+    
     respond_to do |format|
       if @search.save
         format.html { redirect_to(@search, :notice => 'Search was successfully created.') }

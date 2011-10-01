@@ -10,6 +10,25 @@
         <b>Freecycle Group Name:</b>
         <%= @user.group_name%>
       </p>
+      <table>
+      <% if @searches.size != 0 %>
+        <% @searches.each do |search| %>
+          <tr>Search for: <%= search.search_words %></tr>
+          <tr>Under the Freexchange group: <%= search.group_name %></tr>
+          <tr>In the neighborhood: <%= search.neighborhood %></tr>
+          <tr>Last updated: <%= search.updated_at %></tr>
+          <% if !search.last_itemnum.nil? %>
+            <tr>Last Freecycle item number found under this search: <%= link_to search.last_itemnum , :controller=>"listings", :action => "getlisting", :group_name=>search.group_name, :number=>search.last_itemnum %></tr>
+          <% else %>
+            <tr> There has not been any Freecycle items found for this search yet :-( Check back later </tr>
+          <% end %>
+          <tr>Date search created: <%= search.created_at %></tr>    
+          <%# if design.user == current_user%><%#= link_to 'Edit', edit_design_path(design) %> | <%#= link_to 'Destroy', design, :confirm => 'Are you sure?', :method => :delete %><%# end %>
+        <% end %>
+      <% else %>
+          <p>You currently do not have any searches in the system. Click <%= link_to "here and add one now!", new_search_path %>
+      <% end %>
+      </table>
 
 
 

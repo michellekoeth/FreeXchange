@@ -1,23 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Userid:</b>
-  <%= @search.userid %>
+  <b>User id:</b>
+  <%= current_user.id %>
 </p>
-
 <p>
-  <b>Querystr:</b>
-  <%= @search.querystr %>
+  <b>Search Words:</b>
+  <%= @search.search_words %>
 </p>
-
 <p>
-  <b>Datestart:</b>
-  <%= @search.datestart %>
+  <b>Freecycle Group name:</b>
+  <%= @search.group_name %>
 </p>
-
 <p>
-  <b>Dateend:</b>
-  <%= @search.dateend %>
+  <b>Neighborhood:</b>
+  <%= @search.neighborhood %>
+</p>
+<p>
+  <b>Date Created:</b>
+  <%= @search.created_at %>
 </p>
 
 

@@ -12,7 +12,10 @@ class DashboardController < ApplicationController
 
   # GET /dashboard
   def show
+  #show user details, and searches they have registered and any listings  
   @user = current_user
+  @searches = @user.searches
+  @listings = @user.listings
 
     respond_to do |format|
       format.html # show.html.erb
