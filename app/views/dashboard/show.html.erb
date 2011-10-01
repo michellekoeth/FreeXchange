@@ -1,34 +1,28 @@
-      <p>
-        <b>Phone number:</b>
-        <%= @user.phonenumber %>
-      </p>
-      <p>
-        <b>Email:</b>
-        <%= @user.email %>
-      </p>
-      <p>
-        <b>Freecycle Group Name:</b>
-        <%= @user.group_name%>
-      </p>
-      <table>
-      <% if @searches.size != 0 %>
-        <% @searches.each do |search| %>
-          <tr>Search for: <%= search.search_words %></tr>
-          <tr>Under the Freexchange group: <%= search.group_name %></tr>
-          <tr>In the neighborhood: <%= search.neighborhood %></tr>
-          <tr>Last updated: <%= search.updated_at %></tr>
-          <% if !search.last_itemnum.nil? %>
-            <tr>Last Freecycle item number found under this search: <%= link_to search.last_itemnum , :controller=>"listings", :action => "getlisting", :group_name=>search.group_name, :number=>search.last_itemnum %></tr>
-          <% else %>
-            <tr> There has not been any Freecycle items found for this search yet :-( Check back later </tr>
-          <% end %>
-          <tr>Date search created: <%= search.created_at %></tr>    
-          <%# if design.user == current_user%><%#= link_to 'Edit', edit_design_path(design) %> | <%#= link_to 'Destroy', design, :confirm => 'Are you sure?', :method => :delete %><%# end %>
-        <% end %>
+<p><b>Phone number:</b><%= @user.phonenumber %>
+<p><b>Email:</b><%= @user.email %>
+<p><b>Freecycle Group Name:</b><%= @user.group_name%>
+<p><%= link_to "Click Here to Update Your Info", edit_user_registration_path %>
+<br><br>
+  <% if @searches.size != 0 %>
+    <% @searches.each do |search| %>
+      <p><b>Search for:</b> <%= search.search_words %>
+      <p><b>FreeCycle group:</b> <%= search.group_name %>
+      <p><b>Neighborhood:</b> <%= search.neighborhood %>
+      <p><b>Last updated:</b> <%= search.updated_at %>
+      <% if !search.last_itemnum.nil? %>
+        <p>Last Freecycle item number found under this search: <%= link_to search.last_itemnum , :controller=>"listings", :action => "getlisting", :group_name=>search.group_name, :number=>search.last_itemnum %>
       <% else %>
-          <p>You currently do not have any searches in the system. Click <%= link_to "here and add one now!", new_search_path %>
+        <p>There has not been any Freecycle items found for this search yet :-( Check back later
       <% end %>
-      </table>
+      <p><b>Date search created:</b> <%= search.created_at %>
+      <p><%= link_to "Edit this search.", edit_search_path(search) %> | <%= link_to 'Delete this search.', search, :confirm => 'Are you sure?', :method => :delete %> | <%= link_to 'Run the search now.', search_path(search.id) %>
+      <hr>
+    <% end %>
+    Click <%= link_to "here to add another search!", new_search_path %>
+  <% else %>
+        <p>You currently do not have any searches in the system. Click <%= link_to "here and add one now!", new_search_path %>
+  <% end %>
+
 
 
 

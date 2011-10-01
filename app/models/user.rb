@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :group_name, :phonenumber
 
   def notify_about_listings(search,new_listings)
     message = "You have #{new_listings.length} results for '#{search.search_words}'"

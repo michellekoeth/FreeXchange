@@ -1,25 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User id:</b>
-  <%= current_user.id %>
-</p>
-<p>
-  <b>Search Words:</b>
-  <%= @search.search_words %>
-</p>
-<p>
-  <b>Freecycle Group name:</b>
-  <%= @search.group_name %>
-</p>
-<p>
-  <b>Neighborhood:</b>
-  <%= @search.neighborhood %>
-</p>
-<p>
-  <b>Date Created:</b>
-  <%= @search.created_at %>
-</p>
+<% @listing.each do |listing|%>
+    <li class="shop-list">
+        <div class="shop-list-name">Item title: <%= listing[:title] %>
+          <P>Click <%= link_to 'here for details', :controller=>"listings", :action => "getlisting", :group_name=>@group_name, :number=>listing[:number] %>
+        </div>
+    </li>
+<% end %>
 
 
 <%= link_to 'Edit', edit_search_path(@search) %> |

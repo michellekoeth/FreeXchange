@@ -15,8 +15,8 @@ class SearchesController < ApplicationController
   # GET /searches/1
   # GET /searches/1.xml
   def show
-    @search = Search.find(params[:id])
-
+    @listing = Search.find(params[:id]).current_results
+    @group_name = Search.find(params[:id]).group_name
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @search }
