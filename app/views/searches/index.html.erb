@@ -2,6 +2,7 @@
 
 <%= form_for :search, :url => finditem_searches_path, :method=>"get" do |f| %>
   <%= f.text_field  :search_words, :class=>"entryform-field" %>
+  <p class="eg">e.g. Couch</p>
   <br><br>
   <%= f.label "Choose from an available Freecycle Group:" %><br/>
   <% @g = Fcgroup.all %>
@@ -10,7 +11,7 @@
       <option value="<%= g.group_name %>"><%= g.group_name_human %></option>
     <% end %>
   </select>
-  <p class="eg">e.g. Couch</p>
+
   <div class="buttondiv">
     <%= f.submit :value=>"submit", :class=>"button" %>
   </div>

@@ -23,11 +23,11 @@
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <P><P>
+  <%= link_to "Go to Your Dashboard", dashboard_show_path %>
   <% else %>
     <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
   <% end %>
-  <P><P>
-  <%= link_to "Go to Your Dashboard", dashboard_show_path %>
 </div>
 </body>
 </html>
