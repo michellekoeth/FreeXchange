@@ -40,9 +40,9 @@ module Freecycle
 
     result = retrieve_listings(group_name, query)
     #The below debug code will take the response output and put it into a file - output.html
-    aFile = File.new("output.html", "w")
-    aFile.write(result.body)
-    aFile.close
+    #aFile = File.new("output.html", "w")
+    #aFile.write(result.body)
+    #aFile.close
     parsed = parse_listings(result.body)
   end
 
