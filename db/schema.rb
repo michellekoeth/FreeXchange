@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111001181956) do
+ActiveRecord::Schema.define(:version => 20111002043921) do
 
   create_table "fcgroups", :force => true do |t|
     t.string  "group_name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20111001181956) do
     t.text     "dateposted"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
   end
 
   create_table "rails_admin_histories", :force => true do |t|

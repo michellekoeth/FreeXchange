@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   def notify_about_listings(search,new_listings)
     message = "You have #{new_listings.length} results for '#{search.search_words}'"
     message += ": "
-    message += new_listings.map {|l| "#{l[:title]} (#{l[:neighborhood]})"}*", "
+    message += search.listings.map {|l| "#{l[:id]} #{l[:title]} (#{l[:neighborhood]})"}*", "
     #puts "Sending flocky message"
     $outbound_flocky.message(ENV['APP_NUMBER'], message, [self.phonenumber])
     # Below is for debugging
