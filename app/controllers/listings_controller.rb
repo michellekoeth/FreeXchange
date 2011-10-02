@@ -51,7 +51,19 @@ class ListingsController < ApplicationController
   def handle_respond(msg, number)
     listingid = msg
     @listing = Listing.find(listingid)
-    offeror = Freecycle::respondtoofferFC(@listing.group_name, listingid, number)
+    agent = Mechanize.new
+    agent.get("http://my.freecycle.org/login")
+    # The first form is the login form
+    form = agent.page.forms.first
+    form.username = ENV['FCUSER']
+    form.pass = ENV['FEX']
+    form.submit
+    # now get the detailed listing page
+    agent.get("http://groups.freecycle.org/" + @listing.group_name + "/posts/" + listingid)
+    trs = agent.page.search("tr")
+    # keep track of the offeror so we can tell the user who it was
+    offeror = trs[2].css("td")[0].css("text()")[0].text
+    #offeror = Freecycle::respondtoofferFC(@listing.group_name, listingid, number)
     outmessage = "At your request, a message on Freecycle "+@listing.group_name+", has been sent to "+offeror+" about Post ID "+listingid+"."
     message outmessage, number
   end
