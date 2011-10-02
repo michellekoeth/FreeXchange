@@ -51,7 +51,9 @@ class ListingsController < ApplicationController
   def handle_respond(msg, number)
     listingid = msg
     @listing = Listing.find(listingid)
-    Freecycle::respondtoofferFC(@listing.group_name, listingid, number)
+    offeror = Freecycle::respondtoofferFC(@listing.group_name, listingid, number)
+    outmessage = "At your request, a message on Freecycle "+@listing.group_name+", has been sent to "+offeror+" about Post ID "+listingid+"."
+    message outmessage, number
   end
   
   def handle_listnow(message, number)

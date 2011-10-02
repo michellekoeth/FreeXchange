@@ -47,7 +47,7 @@ module Freecycle
     #and schedule a pickup? Thanks so much!"
     #form2.submit
     # Notify user that a reply has been sent to the offeror
-    $outbound_flocky.message(ENV['APP_NUMBER'], "At your request, a message on Freecycle "+group_name+", has been sent to "+offeror+" about Post ID "+number+".", phonenumber)
+    #$outbound_flocky.message(ENV['APP_NUMBER'], "At your request, a message on Freecycle "+group_name+", has been sent to "+offeror+" about Post ID "+number+".", phonenumber)
   end
   
   def respondtoofferFCYG(username,password,group_name,itemnumber)
