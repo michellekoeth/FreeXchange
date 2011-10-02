@@ -1,18 +1,81 @@
-FreeXchange - Bridging the digital divide for Freecycle communities. This app provides a multi-faceted txt message and 
-voice based interface for getting listings and following up on listings posted to Freecycle. Users of Freecycle no
+FreeXchange - Bridging the digital divide for Freecycle communities. This app provides a multi-faceted txt message 
+interface for getting listings and following up on listings posted to Freecycle. Users of Freecycle no
 longer will need to sit by a computer 24x7 to be a first responder to a Freecycle listing. Instead, the FreeXchange
 system will push a TXT message to a user when a listing meeting a user's criteria appears, and can even automatically
-respond to the listor via TXT message OR via voice commands spoken via phone. In this way, people without computers
+respond to the listor via TXT message. In this way, people without computers
 can engage with Freecycle and also be able to receive needed items. Many of the neediest users of Freecycle do not
 have a computer or easy internet access. With FreeXchange, you can be sure that those folks most neediest for free
 items have EQUAL access to the Freecycle system.
 
-FreeXchange is built using Ruby on Rails with a SQLite database.
+FreeXchange is built using Ruby on Rails with a SQLite database in development. In production, it is hosted by Heroku
+at http://freexchange.heroku.com which uses a Postgreql database.
 
-
-Current Dev Team: Karla (Design Lead), Michelle (Project Lead), Talin (Development Lead)
+Current Dev Team: Karla (Design Lead), Michelle (Project Lead/Developer/Documenter), Talin (Development Lead)
 
 Supporters/Advisors: James
+
+----- TO INSTALL -----
+
+The app uses the Flocky gem to communicate with Tropo, our telephony platform. Flocky will not send out text messages
+in a development environment, and requires that certain environmental variables be set with various Tropo account
+information. Therefore, you need to set up a Tropo account (http://www.tropo.com) and then, set the appropriate 
+environmental variables (the variables are set forth in the config/environments/production.rb file).
+
+Further, Freexchange has two environmental variables of its own that you need to set:
+FCUSER - the username registered on Freecycle that the system uses for access
+FEX - the password for FCUSER
+APP_NUMBER - the phone number you have registered on Tropo for the app
+
+Other than setting up the environmental vars and your Tropo account, the app should work given you've ran all the
+database migrations.
+
+----------------------
+
+Technical specifications about Freexchange
+
+Freexchange includes Rails Admin. This is to make configuring the application easier. There is
+a table and model called fcgroups for entering in new freecycle groups. Because each Freecycle group works 
+differently in terms of validating new users, and what permissions it grants to users without validation or
+without logging in, and also some freecycle groups are actually just Yahoo groups, and not native Freecycle groups. 
+Therefore, the system can keep track of all these  nuances between the groups in the fcgroups table which you 
+can edit using Rails Admin.
+
+The app uses a lot of model functions for storing searches and listings, and uses a library module called 
+Freecycle.rb to do the data calls against Freecycle. We use the mechanize gem to interact with the Freecycle
+site, and Nokogiri for HTML parsing.
+
+Searches are periodically conducted using a cron job which is a rake task called update_saved_searches
+
+There are some hard coded defaults and operating presumptions in our app at the moment. But rather than having a 
+zillion env variables, we'd like to make these defaults configurable through a config table which would be 
+updated/edited through Rails Admin - eventually.
+
+So, some of the hard coded stuff/ operating presumptions are:
+1) Time span in which to search backwards for a particular search word. For example, if you do a search on "Couch"
+the system is hard coded to search back only two weeks from the present date.
+2) The system only expects to work with Native freecycle groups (that is, non Yahoo Group freecycle groups). This
+could be updated and unhard coded, but the algorithm for the URL formation for the Yahoo Group based freecycle groups
+would have to be figured out, and then the system would need to look at the boolean set in the fcgroups table to
+determine whether it needs to use the Yahoo format or the Native format in performing a search/reply.
+3) The system currently does not support any SMTP mail service for connecting a user to a listor via email. 
+Instead we use a "mailto:" if the user prefers to communicate over email. We figure that if you can use email,
+you probably aren't a key constituent user of Freexchange. Our aim is to improve the ability for people who do not
+have ready access to email to be able to use their phone and SMS capabilities only to negotiate an acceptance of a
+Freecycle offer.
+4) The system does not offer a way for users to reset their passwords via email. Instead, they can reset their
+passwords via a code sent to their phone via text message.
+5) The system only allows people to configure searches and set up accounts through the website. The thought is that
+this interaction with the website should be minimal (and in the case of setting up the account - only one time). To
+provide a means of allowing a user to set up an account and searches is not out of the scope for future development
+but, we were up against some real hurdles in trying to offer maximum txt based funcitonality while still keeping
+overall messaging low. This was how we decided to address this issue for now.
+
+
+-------------------
+
+Current Development / Wish List 
+
+
 
 MVP Technical Specification (Talin is dev lead with Michelle assisting)
 
