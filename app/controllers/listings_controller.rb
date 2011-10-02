@@ -25,34 +25,14 @@ class ListingsController < ApplicationController
       function_name = "handle_#{c.last}".to_sym
       if match = params[:message].match(/^#?#{pattern}:?(.*)/i)
         self.send(function_name,match.to_a.last.strip, params[:origin_number])
-        render :text=>"sent", :status=>202
-        return
+        break
       end
     end
     
     if m=params[:message].match(/^#\w*/)
       message "Sorry, unrecognized command '#{m[0]}'. Text #help for valid commands",params[:origin_number]
-      return
     end
 
-    #not signup, regular message
-    @user = User.find_by_phonenumber(params[:origin_number])
-
-    if @user.nil?
-      message "You aren't signed up with this phone number. Register today at http://freecycle.heroku.com", params[:origin_number]
-    end
-    
-    #we have a regular message, with a user
-    @message = Message.new(:user=>@user,:location=>@user.location,:lat=>@user.lat,:lon=>@user.lon,:message=>params[:message],:phone=>params[:origin_number])
-    
-    if @message.save
-      #send message out to everyone in range
-      nearby_phones = @user.nearby_users.map(&:phone)
-      message @message.message, nearby_phones #TODO: format date
-    else
-      message "SORRY_ERROR_TEXT", params[:origin_number]
-    end
-    
     #return a 202 to tropo
     render :text=>"sent", :status=>202
   end
