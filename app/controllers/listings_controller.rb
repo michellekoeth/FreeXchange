@@ -51,13 +51,13 @@ class ListingsController < ApplicationController
   def handle_respond(msg, number)
     listingid = msg
     @listing = Listing.find(listingid)
-    #agent = Mechanize.new
-    #agent.get("http://my.freecycle.org/login")
+    agent = Mechanize.new
+    agent.get("http://my.freecycle.org/login")
     # The first form is the login form
-    #form = agent.page.forms.first
-    #form.username = ENV['FCUSER']
-    #form.pass = ENV['FEX']
-    #form.submit
+    form = agent.page.forms.first
+    form.username = ENV['FCUSER']
+    form.pass = ENV['FEX']
+    form.submit
     # now get the detailed listing page
     #agent.get("http://groups.freecycle.org/" + @listing.group_name + "/posts/" + listingid)
     #trs = agent.page.search("tr")
