@@ -43,6 +43,7 @@ class SearchesController < ApplicationController
   # POST /searches.xml
   def create
     @search = current_user.searches.new(params[:search])
+    @search.updated_at = Time.now
     
     respond_to do |format|
       if @search.save
@@ -59,7 +60,7 @@ class SearchesController < ApplicationController
   # PUT /searches/1.xml
   def update
     @search = Search.find(params[:id])
-
+    @search.updated_at = Time.now
     respond_to do |format|
       if @search.update_attributes(params[:search])
         format.html { redirect_to(@search, :notice => 'Search was successfully updated.') }
