@@ -47,8 +47,10 @@ class ListingsController < ApplicationController
     message "Listing ID#" + listingid + ", Title: " + @listing.title + ", Group: " + @listing.group_name + " , Neighborhood: " + @listing.neighborhood, number
   end
   
-  def handle_respond(message, number)
-    listingid = message
+  def handle_respond(msg, number)
+    listingid = msg
+    @listing = Listing.find(listingid)
+    Freecycle::respondtoofferFC(@listing.group_name, listingid, number)
   end
   
   def handle_listnow(message, number)
