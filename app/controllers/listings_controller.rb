@@ -59,12 +59,12 @@ class ListingsController < ApplicationController
     form.pass = ENV['FEX']
     form.submit
     # now get the detailed listing page
-    #agent.get("http://groups.freecycle.org/" + @listing.group_name + "/posts/" + listingid)
-    #trs = agent.page.search("tr")
+    agent.get("http://groups.freecycle.org/" + @listing.group_name + "/posts/" + @listing.number)
+    trs = agent.page.search("tr")
     # keep track of the offeror so we can tell the user who it was
-    #offeror = trs[2].css("td")[0].css("text()")[0].text
+    offeror = trs[2].css("td")[0].css("text()")[0].text
     #offeror = Freecycle::respondtoofferFC(@listing.group_name, listingid, number)
-    outmessage = "At your request, a message on Freecycle "+@listing.group_name+", has been sent to Offeror about Post ID "+listingid+"."
+    outmessage = "At your request, a message on Freecycle "+@listing.group_name+", has been sent to " + offeror + " about Post ID "+@listing.number+"."
     message outmessage, number
   end
   
