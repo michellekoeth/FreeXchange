@@ -15,16 +15,11 @@ class Search < ActiveRecord::Base
   end
 
   def new_results
-    return nil unless self.persisted? && self.updated_at? # must be a saved search.
-    # the below line of code is problematic, and it has to do with the date_start variable thats being sent
-    # if you just do this call without the date_start variable, the code seems to work OK
-    # Talin wrote the below line though, so I'll leave it here for now in case I'm misunderstanding
-    # but, just so this thing works, I'm going to use my working substitute for now
-    #results = Freecycle::listings(self.group_name, "search_words"=>self.search_words, "date_start" => self.updated_at.to_date.to_s)
-    #puts "Group name: " + self.group_name + " Search words: " + self.search_words + " Date Start: " + self.updated_at.to_date.to_s
-    # MMK's substitute line:
-    results = Freecycle::listings(self.group_name, "search_words"=>self.search_words)
-    # Not entirely clear what this line does. It seems to not send out result if its already been sent out
+    # must be a saved search.
+    return nil unless self.persisted? && self.updated_at? 
+    #get results that occured since the last time we were saved
+    results = Freecycle::listings(self.group_name, "search_words"=>self.search_words, "date_start" => self.updated_at.to_date.to_s)
+    # Only return results that are newer than our last returned result.
     results = results.take_while {|r| r[:number].to_i > self.last_itemnum.to_i} if self.last_itemnum
     results
   end
