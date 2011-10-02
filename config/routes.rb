@@ -3,6 +3,8 @@ FreeXChange::Application.routes.draw do
   resources :listings do
     collection do
       get "getlisting"
+      post "receive"
+      post "voice"
     end
   end
 
