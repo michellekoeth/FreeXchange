@@ -41,8 +41,8 @@ class ListingsController < ApplicationController
     message "Available commands: #id, #respond, #listnow, #help", number
   end
   
-  def handle_id(message, number)
-    listingid = message
+  def handle_id(msg, number)
+    listingid = msg
     @listing = Listing.find(listingid)
     message "Listing ID#" + listingid + "Title: " + @listing.title + " Neighborhood: " + @listing.neighborhood
   end
