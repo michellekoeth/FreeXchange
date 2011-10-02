@@ -64,6 +64,7 @@ class ListingsController < ApplicationController
     # keep track of the offeror so we can tell the user who it was
     offeror = trs[2].css("td")[0].css("text()")[0].text
     #offeror = Freecycle::respondtoofferFC(@listing.group_name, listingid, number)
+    # TODO: copy in submit code here for the offer response, create a real freecycle page, and TEST
     outmessage = "At your request, a message on Freecycle "+@listing.group_name+", has been sent to " + offeror + " about Post ID "+@listing.number+"."
     message outmessage, number
   end
