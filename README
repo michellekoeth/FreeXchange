@@ -69,11 +69,18 @@ this interaction with the website should be minimal (and in the case of setting 
 provide a means of allowing a user to set up an account and searches is not out of the scope for future development
 but, we were up against some real hurdles in trying to offer maximum txt based funcitonality while still keeping
 overall messaging low. This was how we decided to address this issue for now.
+6) The system only allows you to be registered to one Freecycle group at a time. However, you can have a set of
+saved searches that run against different Freecycle groups. The difference is that when you create or edit a search,
+it defaults to whatever Freecycle group you are currently affliated with. We figured that people only are interested
+in one group at a time, but this feature could be expanded.
 
 
 -------------------
 
 Current Development / Wish List 
+
+-- PEople can enter a neighborhood for a search, but the search actually doesn't limit the returned results to
+the neighborhood entered.
 
 
 
