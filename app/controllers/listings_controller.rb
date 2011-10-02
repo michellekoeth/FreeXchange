@@ -25,7 +25,7 @@ class ListingsController < ApplicationController
       function_name = "handle_#{c.last}".to_sym
       if match = params[:message].match(/^#?#{pattern}:?(.*)/i)
         self.send(function_name,match.to_a.last.strip, params[:origin_number])
-        break
+        #break
       else
         if m=params[:message].match(/^#\w*/)
           message "Sorry, unrecognized command '#{m[0]}'. Text #help for valid commands",params[:origin_number]
