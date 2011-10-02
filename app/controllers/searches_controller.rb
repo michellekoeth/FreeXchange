@@ -27,7 +27,7 @@ class SearchesController < ApplicationController
   # GET /searches/new.xml
   def new
     @search = Search.new
-
+    @cugn = current_user.group_name
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @search }

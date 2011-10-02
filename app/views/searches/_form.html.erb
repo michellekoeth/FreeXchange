@@ -15,11 +15,18 @@
     <%= f.text_field :search_words %>
   </div>
   <div class="field">
+  <p><%= f.label "Freecycle Group" %><br/>
+  <% @g = Fcgroup.all %>
+  <select name="search[group_name]" id="search_group_name" style="height:30px; padding: 5px 0;">
+    <% @g.each do |g|%>
+      <option value="<%= g.group_name %>" <% if g.group_name == @cugn %>selected="selected"<% end %>><%= g.group_name_human %></option>
+    <% end %>
+  </select>
+  </div>
+  <div class="field">
     <%= f.label :neighborhood %><br />
     <%= f.text_field :neighborhood %>
   </div>
-    <%= hidden_field_tag 'group_name', current_user.group_name %>
-  <div class="actions">
     <div class="buttondiv">  
     <%= f.submit :class=>"button"  %>
     </div>

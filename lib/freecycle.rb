@@ -5,7 +5,8 @@ module Freecycle
 
   def itemlistinglogin(group_name,number)
     password = ENV['FEX']
-    link = "http://my.freecycle.org/login?username=digitalbridge&pass=" + password +"&referer=http://groups.freecycle.org/" + group_name + "/posts/" + number
+    fcuser = ENV['FCUSER']
+    link = "http://my.freecycle.org/login?username=" + fcuser + "&pass=" + password +"&referer=http://groups.freecycle.org/" + group_name + "/posts/" + number
     uri = URI.parse(link)
     response = Net::HTTP.get_response(uri)
     # Freecycle is doing a redirect with my above login URL, so we must follow the redirect
@@ -38,7 +39,10 @@ module Freecycle
     raise "missing required option: search_words" unless options["search_words"].present?
 
     result = retrieve_listings(group_name, query)
-    #puts "Group name: " + group_name
+    #The below debug code will take the response output and put it into a file - output.html
+    aFile = File.new("output.html", "w")
+    aFile.write(result.body)
+    aFile.close
     parsed = parse_listings(result.body)
   end
 

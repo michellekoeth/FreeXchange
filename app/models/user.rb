@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
     message = "You have #{new_listings.length} results for '#{search.search_words}'"
     message += ": "
     message += new_listings.map {|l| "#{l[:title]} (#{l[:neighborhood]})"}*", "
+    puts "Sending flocky message"
     $outbound_flocky.message(ENV['APP_NUMBER'], message, [self.phonenumber])
+    # Below is for debugging
+    #$outbound_flocky.message '5106068706','Test Message','6095778790'
   end
 end
