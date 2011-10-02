@@ -43,7 +43,7 @@ class ListingsController < ApplicationController
   
   def handle_id(message, number)
     listingid = message
-    @listing = Listing.find(id)
+    @listing = Listing.find(listingid)
     message "Listing ID#" + listingid + "Title: " + @listing.title + " Neighborhood: " + @listing.neighborhood
   end
   
