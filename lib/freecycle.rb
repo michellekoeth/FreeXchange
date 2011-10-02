@@ -4,9 +4,7 @@ require 'mechanize'
 module Freecycle
 
   def itemlistinglogin(group_name,number)
-    password = ENV['FEX']
-    fcuser = ENV['FCUSER']
-    # User Mechanize to login. Some freecycle groups require that you are logged in to view the details of a listing
+    # Use Mechanize to login. Some freecycle groups require that you are logged in to view the details of a listing
     agent = Mechanize.new
     agent.get("http://my.freecycle.org/login")
     # The first form is the login form
@@ -14,8 +12,8 @@ module Freecycle
     form.username = ENV['FCUSER']
     form.pass = ENV['FEX']
     form.submit
-    #form.submit # may need to do twice to work
-    form2 = agent.get("http://groups.freecycle.org/" + group_name + "/posts/" + number)
+    #form.submit # may need to do twice to work - was giving me an error in rails c unless I did twice??
+    agent.get("http://groups.freecycle.org/" + group_name + "/posts/" + number)
     trs = agent.page.search("tr") 
     ret = {"number"=>trs[1].css("td")[0].css("text()")[0].text, 
             # trs[2] and 3 just lists that it is an offer and other meta data- we can skip
@@ -26,12 +24,35 @@ module Freecycle
           }
   end
   
-  def respondtoofferFC(username,password,group_name,itemnumber)
-    #MMK to put mechanize code here for responding to an offer which is on the freecycle site itself
+  def respondtoofferFC(group_name,number, phonenumber)
+    # Responds to an offer with a canned message telling the offeror to followup via phone number
+    # Use Mechanize to login. Some freecycle groups require that you are logged in to view the details of a listing
+    agent = Mechanize.new
+    agent.get("http://my.freecycle.org/login")
+    # The first form is the login form
+    form = agent.page.forms.first
+    form.username = ENV['FCUSER']
+    form.pass = ENV['FEX']
+    form.submit
+    # now get the detailed listing page
+    agent.get("http://groups.freecycle.org/" + group_name + "/posts/" + number)
+    trs = agent.page.search("tr")
+    # keep track of the offeror so we can tell the user who it was
+    offeror = trs[2].css("td")[0].css("text()")[0].text
+    # And get the first form from this new form since that is the message reply form
+    form2 = agent.page.forms.first
+    # Now set the message for this form and submit
+    form2.reply_body="Hi, I am interested in your Freecycle listing. I do not have frequent access to email though.
+    Can you call me or text message me at " + phonenumber + " to let me know if the item is still available,
+    and schedule a pickup? Thanks so much!"
+    form2.submit
+    # Notify user that a reply has been sent to the offeror
+    $outbound_flocky.message(ENV['APP_NUMBER'], "At your request, a message on Freecycle "+group_name+", has been sent to "+offeror+" about Post ID "+number+".", phonenumber)
   end
   
-    def respondtoofferFCYG(username,password,group_name,itemnumber)
+  def respondtoofferFCYG(username,password,group_name,itemnumber)
     #MMK to put mechanize code here for responding to an offer which is on a freecycle yahoo group
+    # Future development / Wishlist
   end
   
   def listings(group_name,options)
