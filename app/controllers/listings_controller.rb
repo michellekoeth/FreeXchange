@@ -26,11 +26,11 @@ class ListingsController < ApplicationController
       if match = params[:message].match(/^#?#{pattern}:?(.*)/i)
         self.send(function_name,match.to_a.last.strip, params[:origin_number])
         break
+      else
+        if m=params[:message].match(/^#\w*/)
+          message "Sorry, unrecognized command '#{m[0]}'. Text #help for valid commands",params[:origin_number]
+        end
       end
-    end
-    
-    if m=params[:message].match(/^#\w*/)
-      message "Sorry, unrecognized command '#{m[0]}'. Text #help for valid commands",params[:origin_number]
     end
 
     #return a 202 to tropo
@@ -44,7 +44,7 @@ class ListingsController < ApplicationController
   def handle_id(msg, number)
     listingid = msg
     @listing = Listing.find(listingid)
-    message "Listing ID#" + listingid + "Title: " + @listing.title + " Neighborhood: " + @listing.neighborhood, number
+    message "Listing ID#" + listingid + ", Title: " + @listing.title + ", Group: " + @listing.group_name + " , Neighborhood: " + @listing.neighborhood, number
   end
   
   def handle_respond(message, number)
