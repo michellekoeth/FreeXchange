@@ -55,30 +55,6 @@ Here you can change your user information, add a search, and see the status of s
   <% else %>
         <p>You currently do not have any searches in the system. Click <%= link_to "here and add one now!", new_search_path %>
   <% end %>
-
-
-
-
-
-
-    <% @searches.each do |search| %>
-      <p><b>Search for:</b> <%= search.search_words %>
-      <p><b>FreeCycle group:</b> <%= search.group_name %>
-      <p><b>Neighborhood:</b> <%= search.neighborhood %>
-      <p><b>Last updated:</b> <%= search.updated_at %>
-      <% if !search.last_itemnum.nil? %>
-        <p><b>Status:</b> Last Freecycle item number found under this search: <%= link_to search.last_itemnum , :controller=>"listings", :action => "getlisting", :group_name=>search.group_name, :number=>search.last_itemnum %>
-      <% else %>
-        <p><b>Status:</b> The system did not find this item within the last hour. <%= link_to 'Run the search now to check again.', search_path(search.id) %>
-      <% end %>
-      <p><b>Date search created:</b> <%= search.created_at %>
-      <p><%= link_to "Edit this search.", edit_search_path(search) %> | <%= link_to 'Delete this search.', search, :confirm => 'Are you sure?', :method => :delete %> 
-      <hr>
-    <% end %>
-    Click <%= link_to "here to add another search!", new_search_path %>
-  <% else %>
-        <p>You currently do not have any searches in the system. Click <%= link_to "here and add one now!", new_search_path %>
-  <% end %>
 </div>
 
 
