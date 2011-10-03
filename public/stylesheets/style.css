@@ -334,11 +334,12 @@ font-family:Helvetica,Arial,sans-serif;
 }
 body .general
 {
+  background-color: white;
 	width: 344px;
 	margin-right: 10px;
 	margin-left: 10px;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-right: 60px;
+	padding-left: 60px;
 	margin: 0 auto;
 	display: block;
 }
@@ -381,7 +382,7 @@ margin: 0 auto;
   font-size:1em;
   width:100%;
   margin: auto;
-  text-align:center;
+  text-align:left;
   padding:20px 0px 10px 0px;
   line-height:150%
 }
@@ -438,6 +439,7 @@ body .general
  body #credits
 {
 	clear: both;
+	
 }
 
 }
