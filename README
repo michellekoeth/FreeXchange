@@ -10,6 +10,10 @@ items have EQUAL access to the Freecycle system.
 FreeXchange is built using Ruby on Rails with a SQLite database in development. In production, it is hosted by Heroku
 at http://freexchange.heroku.com which uses a Postgreql database.
 
+A rake command which is scheduled using a cron job, runs periodically to check Freecycle for all of the searches
+that users have entered into the system. You run the rake command using the following:
+heroku run rake update_saved_searches
+
 Current Dev Team: Karla (Design Lead), Michelle (Project Lead/Developer/Documenter), Talin (Development Lead)
 
 Supporters/Advisors: James
