@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.xml
+  
   def index
     @listings = Listing.all
 
@@ -67,9 +68,9 @@ class ListingsController < ApplicationController
     # TODO: copy in submit code here for the offer response, create a real freecycle page, and TEST
     form2 = agent.page.forms.first
     # Now set the message for this form and submit
-    form2.reply_body="Hi, I am interested in your Freecycle listing. I do not have frequent access to email though.
-    Can you call me or text message me at " + phonenumber + " to let me know if the item is still available,
-    and schedule a pickup? Thanks so much!"
+    form2.reply_body="Hi, I am interested in your Freecycle listing. I do not have frequent access to email though. " +
+    "Can you call me or text message me at " + phonenumber + " to let me know if the item is still available, and" +
+    " schedule a pickup? Thanks so much!"
     form2.submit
     outmessage = "At your request, a message on Freecycle "+@listing.group_name+", has been sent to " + offeror + " about Post ID "+@listing.number+"."
     message outmessage, number
