@@ -37,7 +37,6 @@ a
 	margin: 0;
 	padding: 0;
 	font-size: 100%;
-	vertical-align: baseline;
 	background: transparent;
 }
 
@@ -102,7 +101,7 @@ body
 	width: 288px;
 	background: white;
 	color: #F78127;
-	text-align:center;
+	text-align:left;
 
 }
 body .general,body #credits
@@ -123,7 +122,7 @@ body .tablet,body .desktop,body .hello,body .hdtv
 }
 
 h1 {
-	padding:27px 0px 25px 0px;
+	padding:25px 0px 25px 0px;
 	margin:0 auto;
 	display;block;
 	font-weight: bold;
@@ -258,7 +257,6 @@ form input, form select
 .shop-list {
   border-top:1px solid #394C1B;
 	list-style: none;
-	border-bottom: 1px solid #394C1B;
 	margin: 0 0 20px 0;
 	text-align:left;
 	width:100%;
@@ -364,7 +362,7 @@ body #credits
   clear: both;
   width: 80%;
   text-align: center;
-  padding-top: 7px;
+  padding-top: 5px;
   font-size: 1em;
   line-height: 150%;
   
@@ -392,7 +390,7 @@ margin: 0 auto;
 
 }
 
-a:link {text-decoration: none; color:#21AABD;}
+a:link {text-decoration: none;text-align:center; color:#21AABD;}
 a:visited {text-decoration: none; color:#027982;}
 a:active {text-decoration: none; color:#21AABD;}
 a:hover {text-decoration: underline; color:#42C7D1;}
@@ -438,7 +436,7 @@ body .general
  body #credits
 {
 	clear: both;
-	
+	padding-top: 10px;
 }
 
 }
