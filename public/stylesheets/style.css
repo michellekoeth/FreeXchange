@@ -358,18 +358,16 @@ body #credits
 {
   font-weight:bold
 	width: 536px;
-	margin:auto;
-	color:#4A212F;
-	display:block;
-	clear:both;
-	width:80%;
-	text-align:center;
-	padding-top: 30px;
-	font-size:1em;
-	line-height:150%
-
-	
-	
+  margin: auto;
+  color: #4A212F;
+  display: block;
+  clear: both;
+  width: 80%;
+  text-align: center;
+  padding-top: 7px;
+  font-size: 1em;
+  line-height: 150%;
+  
 }
 #credits ul
 {
