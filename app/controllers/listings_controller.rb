@@ -40,7 +40,8 @@ class ListingsController < ApplicationController
   end
   
   def handle_help(message,number)
-    message "Available commands: #id, #respond, #listnow, #help", number
+    #message "Available commands: #id, #respond, #listnow, #help", number
+    message "Available commands: #id, #respond, #help", number
   end
   
   def handle_id(msg, number)
