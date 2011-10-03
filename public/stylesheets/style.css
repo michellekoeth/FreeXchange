@@ -101,14 +101,13 @@ body
 	width: 288px;
 	background: white;
 	color: #F78127;
-	text-align:left;
+	text-align:center;
 
 }
 body .general,body #credits
 {
   font-family: 'Comfortaa', Helvetica, arial, sans-serif;
   font color: #21AABD;
-	width: 248px;
 	margin-right: 10px;
 	margin-left: 10px;
 	padding-right: 10px;
@@ -248,8 +247,8 @@ form input, form select
 }
 
 #listhead{
-    margin: 15px 0px 20px 0px;
-    text-align:justify;
+    margin: 20px 0px 20px 0px;
+    text-align:left;
 
 }
 
@@ -398,7 +397,6 @@ a:hover {text-decoration: underline; color:#42C7D1;}
 }
 body .general
 {
-	width: 440px;
 	margin-right: 10px;
 	margin-left: 10px;
 	padding-right: 10px;
