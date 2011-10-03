@@ -26,16 +26,6 @@ Here you can change your user information, add a search, and see the status of s
 <p><%= link_to "Click Here to Update Your Info", edit_user_registration_path %>
 <br><br>
 <b><u>Saved Searches:</u></b>
-  <% if @searches.size != 0 %><h1>Dashboard:</h1>
-Here you can change your user information, add a search, and see the status of searches you've already saved</h2>
-<br><br>
-<b><u>User Profile Info:</u></b>
-<p><b>Phone number:</b> <%= @user.phonenumber %>
-<p><b>Username or Email:</b> <%= @user.email %>
-<p><b>Freecycle Group Name:</b> <%= @user.group_name%>
-<p><%= link_to "Click Here to Update Your Info", edit_user_registration_path %>
-<br><br>
-<b><u>Saved Searches:</u></b>
   <% if @searches.size != 0 %>
     <% @searches.each do |search| %>
       <p><b>Search for:</b> <%= search.search_words %>
