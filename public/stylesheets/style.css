@@ -4,9 +4,9 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 	padding: 0;
 	border: 0;
 	outline: 0;
-	font-size: 107%;
+	font-size: 100%;
   line-height: 115%; 
-  letter-spacing: 5px
+  letter-spacing: 1px;
 	vertical-align: baseline;
 	background: transparent;
 }
@@ -81,7 +81,7 @@ table
 hr
 {
 	display: block;
-	height: 1px;
+	height: 2px;
 	border: 0;
 	border-top: 1px solid #ccc;
 	margin: 1em 0;
@@ -101,18 +101,18 @@ body
 	width: 288px;
 	background: white;
 	color: #F78127;
-	text-align:left;
+	text-align:center;
 
 }
 body .general,body #credits
 {
   font-family: 'Comfortaa', Helvetica, arial, sans-serif;
   font color: #21AABD;
-	width: 248px;
 	margin-right: 10px;
 	margin-left: 10px;
 	padding-right: 10px;
 	padding-left: 10px;
+	padding-top: 42px;
 }
 
 body .tablet,body .desktop,body .hello,body .hdtv
@@ -154,8 +154,7 @@ h2{
     width:100%;
 }
 .buttondiv {
-    margin: auto;
-    width: 80%;
+    width: 100%;
     margin-bottom: 0px;
     padding:0px;
 }
@@ -249,8 +248,8 @@ form input, form select
 }
 
 #listhead{
-    margin: 15px 0px 20px 0px;
-    text-align:justify;
+    margin: 20px 0px 20px 0px;
+    text-align:left;
 
 }
 
@@ -354,24 +353,18 @@ body .general
 }
 body #credits
 {
-  font-weight:bold
-	width: 536px;
-  margin: auto;
+  font-weight:bold;
   color: #4A212F;
   display: block;
-  clear: both;
-  width: 80%;
-  text-align: center;
-  padding-top: 5px;
+  padding-top: 2px;
   font-size: 1em;
-  line-height: 150%;
+  line-height: 120%;
   
 }
 #credits ul
 {
 list-style-type: none;
-padding: 0px;
-margin: 0 auto;
+padding: 1px;
 }
 
 #credits p{
@@ -379,18 +372,16 @@ margin: 0 auto;
   font-size:1em;
   width:100%;
   margin: auto;
-  text-align:left;
   padding:20px 0px 10px 0px;
-  line-height:150%
+  line-height:120%
 }
 
 #credits img {
     vertical-align:text-bottom;
-    padding: 40px;
 
 }
 
-a:link {text-decoration: none;text-align:center; color:#21AABD;}
+a:link {text-decoration: none; color:#21AABD;}
 a:visited {text-decoration: none; color:#027982;}
 a:active {text-decoration: none; color:#21AABD;}
 a:hover {text-decoration: underline; color:#42C7D1;}
@@ -407,7 +398,6 @@ a:hover {text-decoration: underline; color:#42C7D1;}
 }
 body .general
 {
-	width: 440px;
 	margin-right: 10px;
 	margin-left: 10px;
 	padding-right: 10px;
@@ -437,6 +427,8 @@ body .general
 {
 	clear: both;
 	padding-top: 10px;
+	text-align:center;
+	
 }
 
 }
