@@ -68,7 +68,7 @@ class ListingsController < ApplicationController
     # TODO: copy in submit code here for the offer response, create a real freecycle page, and TEST
     form2 = agent.page.forms.first
     # Now set the message for this form and submit
-    form2.reply_body="Hi, I am interested in your Freecycle listing. I do not have frequent access to email though. " +
+    form2.reply_body="Hello " + offeror + ",\n\n I am interested in your Freecycle listing of "+ @listing.title + ". I do not have frequent access to email though. " +
     "Can you call me or text message me at " + number + " to let me know if the item is still available, and" +
     " schedule a pickup? Thanks so much!"
     form2.submit
