@@ -256,23 +256,24 @@ form input, form select
 }
 
 .shop-list {
-    border-top:1px solid #394C1B;
+  border-top:1px solid #394C1B;
 	list-style: none;
 	border-bottom: 1px solid #394C1B;
 	margin: 0 0 20px 0;
 	text-align:left;
-	display: inline-block;
 	width:100%;
 
 
 }
 
-.shop-list-name{
-	display:block;
-	font-variant:small-caps;
-	font-weight:bold;
+.item{
+  font-family: 'Comfortaa', Helvetica, arial, sans-serif;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: normal;
+  color: #21AABD;
 	padding: 2px;
-	text-transform:capitalize;
 }
 .shop-list li
 {
@@ -282,14 +283,14 @@ form input, form select
 	padding: 10px 0px 15px 0px;
 	border-top: 1px solid #394C1B;
 	width: 100%;
-	font-variant:small-caps;
-  text-transform:capitalize;
+}
+.neighborhood{
+  color: #21AABD;
 }
 
 .shop-list li a { 
 
 	text-decoration: none; 
-	color:#ACBF8F; /*E9F0F2*/
 
 }
 .tableter {
