@@ -40,9 +40,9 @@ module Freecycle
     # keep track of the offeror so we can tell the user who it was
     offeror = trs[2].css("td")[0].css("text()")[0].text
     # And get the first form from this new form since that is the message reply form
-    #form2 = agent.page.forms.first
+    form2 = agent.page.forms.first
     # Now set the message for this form and submit
-    #form2.reply_body="Hi, I am interested in your Freecycle listing. I do not have frequent access to email though.
+    form2.reply_body="Hi, I am interested in your Freecycle listing. I do not have frequent access to email though.
     #Can you call me or text message me at " + phonenumber + " to let me know if the item is still available,
     #and schedule a pickup? Thanks so much!"
     #form2.submit
