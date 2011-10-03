@@ -14,6 +14,8 @@ A rake command which is scheduled using a cron job, runs periodically to check F
 that users have entered into the system. You run the rake command using the following:
 heroku run rake update_saved_searches
 
+For further information about the app or how to use it, please see our Wiki. We even will have some nice videos linked there :-)
+
 Current Dev Team: Karla (Design Lead), Michelle (Project Lead/Developer/Documenter), Talin (Development Lead)
 
 Supporters/Advisors: James
@@ -61,13 +63,11 @@ the system is hard coded to search back only two weeks from the present date.
 could be updated and unhard coded, but the algorithm for the URL formation for the Yahoo Group based freecycle groups
 would have to be figured out, and then the system would need to look at the boolean set in the fcgroups table to
 determine whether it needs to use the Yahoo format or the Native format in performing a search/reply.
-3) The system currently does not support any SMTP mail service for connecting a user to a listor via email. 
-Instead we use a "mailto:" if the user prefers to communicate over email. We figure that if you can use email,
+3) The system currently does not support any SMTP mail service for connecting a user to a listor via email. We figure that if you can use email,
 you probably aren't a key constituent user of Freexchange. Our aim is to improve the ability for people who do not
 have ready access to email to be able to use their phone and SMS capabilities only to negotiate an acceptance of a
 Freecycle offer.
-4) The system does not offer a way for users to reset their passwords via email. Instead, they can reset their
-passwords via a code sent to their phone via text message.
+4) The system does not offer a way for users to reset their passwords via email. 
 5) The system only allows people to configure searches and set up accounts through the website. The thought is that
 this interaction with the website should be minimal (and in the case of setting up the account - only one time). To
 provide a means of allowing a user to set up an account and searches is not out of the scope for future development
@@ -81,144 +81,26 @@ in one group at a time, but this feature could be expanded.
 
 -------------------
 
-Current Development / Wish List 
+Future Development Wish List 
 
 -- PEople can enter a neighborhood for a search, but the search actually doesn't limit the returned results to
 the neighborhood entered.
 
+-- Internationalization - Spanish
+
+-- Basic Response to Listing via Phone. The user can call, recieve their current listings via voice command, and reply to a listing via voice also.
+
+-- Freecycle registration feature? Allow users to sign up for a Freecycle of their choosing via TXT or voice?
+
+-- Ability to set up searches via voice
 
 
-MVP Technical Specification (Talin is dev lead with Michelle assisting)
+Data Models: Fcgroup, Search, User, Listing - See schema for model specs 
 
--- Current Hurdles:
-
-    How to log someone in to Freecycle via an apish way - currently the login form code is the following:
-
-
-<form method='post' action='http://my.freecycle.org/login' id='loginform'><fieldset>
-Note: There is a way to login and still stay on the same listing page afterwards, thats what this referer value is:    <input type='hidden' name='referer' value="http://groups.freecycle.org/oaklandfreecycle/posts/14698167/Charcoal%20Grill" />
-  <label for='username'>Username :</label>
-   <input type='text' name='username' id='username' /><br />
-   <label for='pass'>Password : </label>
-   <input type='password' name='pass' id='pass' /><br />
-   <label for='keeploggedin'>Remember my login : </label>
-   <input type='checkbox' name='keeploggedin' checked='checked' id='keeploggedin' /><br />
-  <input type='submit' value='Log in' />
-
-So, presumably http://my.freecycle.org/login?username=emfwave&pass=PASS
-
-Would log me in (given I replace PASS with my actual password)
-
-The api way to send a response to a particular listing (currently its done via some form). Freecycle is fairly 
-easy to hack though because it seems like they are using some RESTful by default framework.. 
-For ex, this is the HTML code listed for responding to a listing - its a simple POST to a restful API: 
-(I’m wondering - do you even need to be logged in to do this? I guess so though because you can only access the 
-“reply to listing” feature once you’re logged in, and presumably your freecycle account contains your email address 
-- so the “from” email is a session variable of some sort. Can we get past not having this session variable?)
-
-
-<form method='post' action='http://groups.freecycle.org/oaklandfreecycle/posts/reply/14698387' style='text-align: center' id='replyform'>
-
- <label for='reply_body'>Message to send to the person who made this Post:</label><br />
- <textarea name='reply_body' id='reply_body' rows='8' style='width:80%; margin: 0px auto;'></textarea><br />
-
-<input type='submit' value='Send Message' />
-
-
-I. Web Functionality:
-
-    List items currently offered from entered search term. Provide link back to Freecycle listing for each item found. Search criteria:
-        item description (i.e. couch)
-        date range. Default the date range for a 2 month period.
-        freecycle group (done on a city basis (I think))
-        neighborhood (within the city)
-    Ability to set up/configure notifications for all future postings. Configuration options:
-        item description (and provide for alternative descriptions? (couch, sofa, loveseat, sectional, recliner)
-        freecycle group
-        neighborhood
-        Text of standard response to send to a freecycle lister upon the user finding an item they want.
-    Internationalization - Spanish (we’ll focus efforts on Spanish for MVP)
-
-
-
-
-II. SMS based functionality
-
-    Basic reporting feature via TXT input, TXT output: (we will have to tackle how best to convey a freecycle listing and URL in as little chars as possible)
-        Send text to registered Tropo number - 1 (510) 606-8706, with a request of the following format: item, max # of listings to send back, group, neighborhood, date span.
-            Defaults (i.e. if this parameter is not entered, what is assumed):
-                item - any item
-                max # of listings - 3
-                group - Oakland Freecycle group
-                neighborhood - any neighborhood
-                date span - two months prior from current date (this is a number the user enters which indicates the number of months the system should look back for listings)
-            An empty request (ie no parameters sent) will return the first three listings from Oakland freecycle with a SHORTENED url to the freecycle listing.
-            A request with just the item parameter will return the first three listings from Oakland freecycle of that item. (Listing being the shortened URL and item description)
-            A request with just the item and max # of listings will return up to the max # of listings of the item from Oakland freecycle with shortened URL
-            A request with item, max # of listings and group parameters will return the max # of listings from the specified freecycle group listing for the specified item. With shortened URL
-            A request with item, max # of listings, group, and neighborhood parameters will return the max # of listings from the specified freecycle group and neighborhood for the specified item
-            Same as iv, but now restricted by the date span.
-    Basic reporting feature via TXT input, Phone output: - response of txt request is done VIA phone:
-
-        User queries system as detailed above, but as a last parameter, enters “phone” so a sample query would be: couch, 3, Oakland, temescal, 2, phone
-            System returns a message via txt of the following format: “Thank you for your query. There are couches available on Freecycle right now. Please call 510-606-8706 and when prompted, enter the code 1234 for the listing of couches in Oakland.” (or phone number is stored, and then when Tropo sees that when that phone number has called, the messages corresponding to that phone number are “delievered” - like a phone mail system).
-
-    Basic Response to Listing via TXT
-
-        User can click on shortened URL from text and then pursue accordingly
-        User can text the freecycle item number, and group, and get back the detailed listing via TXT message, and then follow up on their own accordingly
-        User can text the freecycle item number, group, and the keyword “auto” and an automated email (according to user prefs linked to that user’s phone number - if no such user prefs, than a default template email will be sent) - have an automated email is sent to the freecycle lister stating something like “Hello - I am very interested in your [ITEM], but I do not have ready access to an email account. Please call or text message me at [USER NUMBER] if the item is still available to arrange a pickup time. Thanks so much.”
-
-
-  4.    Basic Response to Listing via Phone
-
-    This will be done when the user calls the system to retrieve their listings. At that time, the system will prompt them as to whether they want to respond or not. If they choose that they want to respond, the system will send an email on the user’s behalf with the standard text shown above in 3(d).
-
-
-5.      Freecycle registration feature? Allow users to sign up for a Freecycle of their choosing via TXT or voice?
-
-
-
-III. Voice Based Functionality
-
-    People call the number, and enter information when prompted - like “What are you looking for?” (couch), “OK, what neighborhood are you looking for, please say neighborhood name, or ALL for any neighborhood.”
-    The voice system will need to be heavily documented because now we are folding in geographical dependencies (i.e. name of neighborhoods) as a data depwendency to scaling this app out to other towns/freecycle communities.
-
-
-
-
-
-Data Models:
-
-    Users
-        userid - default
-        phone number - string - added in migration
-        freecycgroup - string - added in migration
-        email - string
-        encrypted_password - string
-    Searches
-        searchid - INDEX
-        freecycsearchgroup - string - added in migration
-        freecycsearchhood - string - added in migration
-        userid (User) - FK, integer - FK relation in model
-        querystr - string
-        datestart - text
-        dateend - text
-        created_at - datetime
-        updated_at - datetime
-    Listings
-        listingid - default
-        searchid - FK, integer - FK relation in model
-        freecycgroup - string
-        freecychood - string
-        freecyclistid - string
-        dateposted - text
-        created_at - datetime
-        updated_at - datetime
-
-
-
+---------------------
 
 Infrastructure Specs:
 Heroku Instance: http://freexchange.heroku.com/
 Rails github repo: https://github.com/jerseycoder/FreeXChange
+Phone number: 1-510-606-8706
+License: Apache 2.0
